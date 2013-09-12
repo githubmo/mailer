@@ -1,0 +1,1 @@
+onix_processor: bundle exec ruby bin/blinkbox-onix_processor

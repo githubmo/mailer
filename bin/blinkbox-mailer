@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+$:<<File.join(File.dirname(__FILE__),'..','lib')
+require 'blinkbox/mailer/version'
+
+if %w{--version -v}.include? ARGV.first
+  puts "blinkbox books: Marvin Onix Processor v#{Blinkbox::Mailer::VERSION}"
+  Process.exit(0)
+end
+
+# Find a suitable properties file
+propfile = File.expand_path("../../mailer.properties",__FILE__)
+unless File.exist?(propfile)
+  $stderr.puts "No properties file found."
+  Process.exit(-1)
+end
+require 'java_properties'
+options = JavaProperties::Properties.new(propfile)
+
+require 'logger'
+options['logger'] = Logger.new(options[:logfile] || $stdout)
+
+require 'blinkbox/mailer'
+
+begin
+  w = Blinkbox::Mailer::Daemon.new(options)
+  w.start
+rescue SystemExit, Interrupt
+  options['logger'].info "Thanks for watching, shutting down."
+
+  w.stop
+rescue Exception => e
+  options['logger'].fatal "#{e.message} (see debug log for more details)"
+  options['logger'].debug "#{e.class}: #{e.message}\n#{e.backtrace.join("\n")}"
+end
