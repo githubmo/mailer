@@ -70,4 +70,5 @@ DEPENDENCIES
   bunny
   cucumber
   java_properties
+  multi_json
   yarjuf

@@ -16,6 +16,15 @@ module Blinkbox
         @amqp[:channel] = @amqp[:connection].create_channel
 
         @amqp[:channel].prefetch(50)
+
+        ActionMailer::Base.smtp_settings = {
+          :address   => options[:smtp_server],
+          :port      => options[:smtp_port],
+          :authentication => :plain,
+          :user_name      => options[:smtp_username],
+          :password       => options[:smtp_password],
+          :enable_starttls_auto => true
+        }
       end
 
       def start
