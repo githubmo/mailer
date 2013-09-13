@@ -29,11 +29,16 @@ module Blinkbox
 
       def start
         @log.info "Listening for email instruction messages"
-        queue = @amqp[:channel].queue("Emails.Outbound", :durable => true)
-        
-        queue.subscribe(:ack => true, :block => true) do |delivery_info, metadata, payload|
+        queue = @amqp[:channel].queue("Emails.Outbound",
+          :durable => true,
+          :arguments => {
+            "x-dead-letter-exchange" => "Emails.Outbound.DLX"
+          }
+        )
+
+        queue.subscribe(ack: true, block: true) do |delivery_info, metadata, payload|
           begin
-            @log.info "Received message #{delivery_info.delivery_tag}"
+            @log.info "Received message (##{delivery_info.delivery_tag})"
             json = MultiJson.load(payload)
 
             raise RuntimeError, "No recipient specified" unless json['to']
@@ -49,16 +54,16 @@ module Blinkbox
             @log.info "Email delivered (#{delivery_info.delivery_tag})"
 
           rescue ActionView::Template::Error => e
-            @amqp[:channel].reject(delivery_info.delivery_tag, false)
-            @log.error "#{e.message} in the message so it was rejected back to the queue (#{delivery_info.delivery_tag})"
+            @amqp[:channel].nack(delivery_info.delivery_tag, false)
+            @log.error "#{e.message} in the message (##{delivery_info.delivery_tag}) so it was rejected back to the queue"
 
           rescue MultiJson::LoadError
-            @amqp[:channel].reject(delivery_info.delivery_tag, false)
-            @log.error "The incoming message was incorrectly formed and was rejected back to the queue (#{delivery_info.delivery_tag})"
+            @amqp[:channel].nack(delivery_info.delivery_tag, false)
+            @log.error "The incoming message (##{delivery_info.delivery_tag}) was incorrectly formed and was rejected back to the queue "
 
           rescue Exception => e
-            @amqp[:channel].reject(delivery_info.delivery_tag, false)
-            @log.error "Failure to process message, rejected back to queue (#{delivery_info.delivery_tag}: #{e.message})"
+            @amqp[:channel].nack(delivery_info.delivery_tag, false)
+            @log.error "Failure to process message (##{delivery_info.delivery_tag}), rejected back to queue (#{e.message})"
             @log.debug "#{e.class}: #{e.message}\n\t#{e.backtrace.join("\n\t")}"
           end
         end
