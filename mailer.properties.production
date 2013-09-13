@@ -3,3 +3,4 @@ smtp_server    = smtp.gmail.com
 smtp_port      = 587
 smtp_username  = <required>
 smtp_password  = <required>
+logger = /var/log/blinkbox/mailer.log

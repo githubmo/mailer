@@ -33,7 +33,7 @@ module Blinkbox
         
         queue.subscribe(:ack => true, :block => true) do |delivery_info, metadata, payload|
           begin
-            @log.info "Received message"
+            @log.info "Received message #{delivery_info.delivery_tag}"
             json = MultiJson.load(payload)
 
             raise RuntimeError, "No recipient specified" unless json['to']
@@ -46,19 +46,19 @@ module Blinkbox
             email.deliver
 
             @amqp[:channel].acknowledge(delivery_info.delivery_tag, false)
-            @log.info "Email delivered"
+            @log.info "Email delivered (#{delivery_info.delivery_tag})"
 
           rescue ActionView::Template::Error => e
             @amqp[:channel].reject(delivery_info.delivery_tag, false)
-            @log.error "#{e.message} in the message so it was rejected back to the queue"
+            @log.error "#{e.message} in the message so it was rejected back to the queue (#{delivery_info.delivery_tag})"
 
           rescue MultiJson::LoadError
             @amqp[:channel].reject(delivery_info.delivery_tag, false)
-            @log.error "The incoming message was incorrectly formed and was rejected back to the queue"
+            @log.error "The incoming message was incorrectly formed and was rejected back to the queue (#{delivery_info.delivery_tag})"
 
           rescue Exception => e
             @amqp[:channel].reject(delivery_info.delivery_tag, false)
-            @log.error "Failure to process message, rejected back to queue (#{e.message})"
+            @log.error "Failure to process message, rejected back to queue (#{delivery_info.delivery_tag}: #{e.message})"
             @log.debug "#{e.class}: #{e.message}\n\t#{e.backtrace.join("\n\t")}"
           end
         end
