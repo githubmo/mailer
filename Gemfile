@@ -8,4 +8,5 @@ gem 'multi_json'
 group :development, :test do
    gem 'yarjuf'
    gem 'cucumber'
+   gem 'rake'
 end

@@ -3,23 +3,28 @@ module Blinkbox
     class Customer < ActionMailer::Base
       layout 'october_launch'
 
-      default :from => "blinkbox books <maildev.blinkboxbooks@gmail.com>",
-              :template_path => 'customer'
+      default from: "blinkbox books <maildev.blinkboxbooks@gmail.com>"
 
       def welcome_to_blinkbox_books(variables = {})
         @variables = Locals.new(variables)
         mail(
-          :to => variables['to'],
-          :subject => variables['subject'] || "Welcome to blinkbox books"
-        )
+          to: variables['to'],
+          subject: variables['subject'] || "Welcome to blinkbox books"
+        ) do |format|
+          format.html
+          format.text
+        end
       end
 
       def reset_password(variables = {})
-        @variables = variables
+        @variables = Locals.new(variables)
         mail(
-          :to => variables['to'],
-          :subject => variables['subject'] || "Password reset"
-        )
+          to: variables['to'],
+          subject: variables['subject'] || "Password reset"
+        ) do |format|
+          format.html
+          format.text
+        end
       end
     end
 
