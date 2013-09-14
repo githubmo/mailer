@@ -2,6 +2,9 @@ require_relative 'mailer/env'
 require_relative 'mailer/models'
 require 'bunny'
 require 'multi_json'
+require 'digest/sha1'
+require 'uri'
+require 'fileutils'
 
 module Blinkbox
   module Mailer
@@ -25,6 +28,11 @@ module Blinkbox
           :password       => options[:smtp_password],
           :enable_starttls_auto => true
         }
+
+        @resource_server = {
+          :write => options[:resource_server_write],
+          :http => options[:resource_server_http]
+        }
       end
 
       def start
@@ -47,11 +55,26 @@ module Blinkbox
               raise RuntimeError, "No such email template '#{json['template']}'"
             end
 
+            view_online_path = File.join(*(['mails'] + Digest::SHA1.hexdigest(json.inspect).scan(/.{4}/))) << '.html'
+
+            local_filename = File.join(@resource_server[:write],view_online_path)
+            json['view_online_url'] = File.join(@resource_server[:http],view_online_path)
+
             email = Blinkbox::Mailer::Customer.send(json['template'], json)
+
+            unless File.directory?(File.dirname(local_filename))
+              @log.debug "Making directory #{File.dirname(local_filename)}"
+              FileUtils.mkdir_p(File.dirname(local_filename))
+            end
+
+            open(local_filename,'w') do |f|
+              f.write email.html_part.body
+            end
+
             email.deliver
 
             @amqp[:channel].acknowledge(delivery_info.delivery_tag, false)
-            @log.info "Email delivered (#{delivery_info.delivery_tag})"
+            @log.info "Email delivered (##{delivery_info.delivery_tag})"
 
           rescue ActionView::Template::Error => e
             @amqp[:channel].nack(delivery_info.delivery_tag, false)
