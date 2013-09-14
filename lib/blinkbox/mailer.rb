@@ -55,7 +55,10 @@ module Blinkbox
               raise RuntimeError, "No such email template '#{json['template']}'"
             end
 
-            view_online_path = File.join(*(['mails'] + Digest::SHA1.hexdigest(json.inspect).scan(/.{4}/))) << '.html'
+            root_folder = ["mails"]
+            root_folder.unshift("user:#{json["restrict_view_to_user"]}") if json["restrict_view_to_user"]
+
+            view_online_path = File.join(*(root_folder + Digest::SHA1.hexdigest(json.inspect).scan(/.{4}/))) + ".html"
 
             local_filename = File.join(@resource_server[:write],view_online_path)
             json['view_online_url'] = File.join(@resource_server[:http],view_online_path)
