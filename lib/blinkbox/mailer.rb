@@ -1,5 +1,6 @@
 require_relative 'mailer/env'
 require_relative 'mailer/models'
+require_relative 'mailer/helpers'
 require 'bunny'
 require 'multi_json'
 require 'digest/sha1'
@@ -61,17 +62,25 @@ module Blinkbox
             view_online_path = File.join(*(root_folder + Digest::SHA1.hexdigest(json.inspect).scan(/.{4}/))) + ".html"
 
             local_filename = File.join(@resource_server[:write],view_online_path)
-            json['view_online_url'] = File.join(@resource_server[:http],view_online_path)
+
+            write_to_resource_server = false
+
+            # ActionStrings track whether they've been used (as a string). This is so that we
+            # only write the online copy of the email if a link to it was put in the email.
+            json['view_online_url'] = ActionString.new(File.join(@resource_server[:http],view_online_path))
 
             email = Blinkbox::Mailer::Customer.send(json['template'], json)
 
-            unless File.directory?(File.dirname(local_filename))
-              @log.debug "Making directory #{File.dirname(local_filename)}"
-              FileUtils.mkdir_p(File.dirname(local_filename))
-            end
+            if json['view_online_url'].used?
+              unless File.directory?(File.dirname(local_filename))
+                FileUtils.mkdir_p(File.dirname(local_filename))
+                @log.debug "Made directory #{File.dirname(local_filename)}"
+              end
 
-            open(local_filename,'w') do |f|
-              f.write email.html_part.body
+              open(local_filename,'w') do |f|
+                f.write email.html_part.body
+              end
+              @log.debug "Written email to #{local_filename}"
             end
 
             email.deliver
