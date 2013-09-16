@@ -3,9 +3,9 @@ require_relative 'mailer/models'
 require_relative 'mailer/helpers'
 require 'bunny'
 require 'multi_json'
-require 'digest/sha1'
 require 'uri'
 require 'fileutils'
+require 'securerandom'
 
 module Blinkbox
   module Mailer
@@ -59,7 +59,7 @@ module Blinkbox
             root_folder = ["mails"]
             root_folder.unshift("user:#{json["restrict_view_to_user"]}") if json["restrict_view_to_user"]
 
-            view_online_path = File.join(*(root_folder + Digest::SHA1.hexdigest(json.inspect).scan(/.{4}/))) + ".html"
+            view_online_path = File.join(*(root_folder + SecureRandom.hex(32).scan(/.{4}/))) + ".html"
 
             local_filename = File.join(@resource_server[:write],view_online_path)
 
