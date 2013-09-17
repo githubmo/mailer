@@ -1,7 +1,11 @@
 require_relative 'mailer/env'
 require_relative 'mailer/models'
+require_relative 'mailer/helpers'
 require 'bunny'
 require 'multi_json'
+require 'uri'
+require 'fileutils'
+require 'securerandom'
 
 module Blinkbox
   module Mailer
@@ -25,6 +29,11 @@ module Blinkbox
           :password       => options[:smtp_password],
           :enable_starttls_auto => true
         }
+
+        @resource_server = {
+          :write => options[:resource_server_write],
+          :http => options[:resource_server_http]
+        }
       end
 
       def start
@@ -47,11 +56,37 @@ module Blinkbox
               raise RuntimeError, "No such email template '#{json['template']}'"
             end
 
+            root_folder = ["mails"]
+            root_folder.unshift("user:#{json["user_id"]}") if json["user_id"]
+
+            view_online_path = File.join(*(root_folder + SecureRandom.hex(32).scan(/.{4}/))) + ".html"
+
+            local_filename = File.join(@resource_server[:write],view_online_path)
+
+            write_to_resource_server = false
+
+            # ActionStrings track whether they've been used (as a string). This is so that we
+            # only write the online copy of the email if a link to it was put in the email.
+            json['view_online_url'] = ActionString.new(File.join(@resource_server[:http],view_online_path))
+
             email = Blinkbox::Mailer::Customer.send(json['template'], json)
+
+            if json['view_online_url'].used?
+              unless File.directory?(File.dirname(local_filename))
+                FileUtils.mkdir_p(File.dirname(local_filename))
+                @log.debug "Made directory #{File.dirname(local_filename)}"
+              end
+
+              open(local_filename,'w') do |f|
+                f.write email.html_part.body
+              end
+              @log.debug "Written email to #{local_filename}"
+            end
+
             email.deliver
 
             @amqp[:channel].acknowledge(delivery_info.delivery_tag, false)
-            @log.info "Email delivered (#{delivery_info.delivery_tag})"
+            @log.info "Email delivered (##{delivery_info.delivery_tag})"
 
           rescue ActionView::Template::Error => e
             @amqp[:channel].nack(delivery_info.delivery_tag, false)
