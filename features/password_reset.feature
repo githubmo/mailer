@@ -3,12 +3,16 @@ Feature: Sending a password reset email
   I want to be able to send a password reset email to a user with the user's variables
   So that the user can receive a personalised templated email asking him to reset
 
-  Scenario: Generating an email from a template and provided variables
-    Given I am using the "password reset" template
-    When I am given the sender email as "test@blinkbox.com"
-    And I am provided the following template variables:
+  Scenario: Sending a password reset email with link when given the correct template variable
+    Given a "password reset" email message is pending processing
+    And it has the recipients:
+      | type | name     | email                           |
+      | to   | John Doe | blinkbox_test+johndoe@gmail.com |
+    And it has the template variables:
       | salutation | John |
-    Then I produce an email to "test@blinkbox.com"
+      | resetLink | https://example.com/reset-john |
+    When the message is processed
+    Then I deliver an email to "test@blinkbox.com"
     And it has the subject "Password reset for your Blinkbox Books account"
-    And it starts with "Dear John"
-    And it contains the text "We have received a request to reset your blinkbox account password."
+    And it matches the output "password_reset.output"
+    And an email is delivered to "blinkbox_test+jondoe@gmail.com

@@ -1,14 +1,17 @@
-Feature: Sending a password changed
-  As a program that automates email sending
-  I want to be able to send a confirmation of a password change to a user
+Feature: Sending a password changed email
+  As the email message transformation service
+  I want the password change which has occurred to be announced to the affected user by email
   So that the user is informed that his password change was successful
 
-  Scenario: Generating an email from a template and provided variables
-    Given I am using the "password change" template
-    When I am given the sender email as "test@blinkbox.com"
-    And I am provided the following template variables:
+  Scenario: Sending a password changed email when given correct template variables
+    Given a "password change" email message is pending processing
+    And it has the recipients:
+      | type | name     | email                           |
+      | to   | John Doe | blinkbox_test+johndoe@gmail.com |
+    And it has the template variables:
       | salutation | John |
-    Then I produce an email to "test@blinkbox.com"
+    When the message is processed
+    Then I deliver an email to "test@blinkbox.com"
     And it has the subject "Password change confirmation"
-    And it starts with "Dear John"
-    And it contains the text "Your password for blinkbox books has successfully been changed."
+    And it matches the output "password_change.output"
+    And an email is delivered to "blinkbox_test+jondoe@gmail.com"
