@@ -18,7 +18,7 @@ Feature: Sending a receipt after purchasing an item
     When the message is processed
     Then I deliver an email to "blinkbox_test+johndoe@gmail.com"
     And it has the subject "Thank you for choosing blinkbox"
-    And it matches the output "reciept.output"
+    And the html component matches the output "reciept.output"
 
   Scenario Outline: Receipt email generation fails when missing variable
     But I do not provide the variable "<missing_variable>"
@@ -26,11 +26,11 @@ Feature: Sending a receipt after purchasing an item
     Then I do not deliver an email to "blinkbox_test+johndoe@gmail.com"
     And the message is rejected
 
-  Examples:
-    | missing_variable      |
-    | recipient             |
-    | salutation            |
-    | bookTitle             |
-    | author                |
-    | price                 |
+    Examples:
+      | missing_variable      |
+      | recipient             |
+      | salutation            |
+      | bookTitle             |
+      | author                |
+      | price                 |
 

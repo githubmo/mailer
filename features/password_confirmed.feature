@@ -11,10 +11,9 @@ Feature: Sending a password changed email
     And it has the template variables:
       | salutation | John |
     When the message is processed
-    Then I deliver an email to "test@blinkbox.com"
+    Then I deliver an email to "blinkbox_test+jondoe@gmail.com"
     And it has the subject "Password change confirmation"
-    And it matches the output "password_change.output"
-    And an email is delivered to "blinkbox_test+jondoe@gmail.com"
+    And the html component matches the output "password_change.output"
 
 
   Scenario Outline: Receipt email generation fails when missing variable
@@ -23,7 +22,7 @@ Feature: Sending a password changed email
     Then I do not deliver an email to "blinkbox_test+johndoe@gmail.com"
     And the message is rejected
 
-  Examples:
-    | missing_variable      |
-    | recipient             |
-    | salutation            |
+    Examples:
+      | missing_variable      |
+      | recipient             |
+      | salutation            |

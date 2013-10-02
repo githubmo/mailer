@@ -12,10 +12,9 @@ Feature: Sending a password reset email
       | salutation | John |
       | resetLink | https://example.com/reset-john |
     When the message is processed
-    Then I deliver an email to "test@blinkbox.com"
+    Then I deliver an email to "blinkbox_test+jondoe@gmail.com"
     And it has the subject "Password reset for your Blinkbox Books account"
-    And it matches the output "password_reset.output"
-    And an email is delivered to "blinkbox_test+jondoe@gmail.com
+    And the html component matches the output "password_reset.output"
 
 
   Scenario Outline: Receipt email generation fails when missing variable
@@ -24,8 +23,8 @@ Feature: Sending a password reset email
     Then I do not deliver an email to "blinkbox_test+johndoe@gmail.com"
     And the message is rejected
 
-  Examples:
-    | missing_variable      |
-    | recipient             |
-    | salutation            |
-    | resetLink             |
+    Examples:
+      | missing_variable      |
+      | recipient             |
+      | salutation            |
+      | resetLink             |
