@@ -15,3 +15,14 @@ Feature: Sending a welcome email
     And it has the subject "Welcome to blinkbox books, John"
     And it matches the output "welcome.output"
     And an email is delivered to "blinkbox_test+jondoe@gmail.com"
+
+  Scenario Outline: Receipt email generation fails when missing variable
+    But I do not provide the variable "<missing_variable>"
+    When the message is processed
+    Then I do not deliver an email to "blinkbox_test+johndoe@gmail.com"
+    And the message is rejected
+
+  Examples:
+    | missing_variable      |
+    | recipient             |
+    | salutation            |

@@ -15,3 +15,15 @@ Feature: Sending a password changed email
     And it has the subject "Password change confirmation"
     And it matches the output "password_change.output"
     And an email is delivered to "blinkbox_test+jondoe@gmail.com"
+
+
+  Scenario Outline: Receipt email generation fails when missing variable
+    But I do not provide the variable "<missing_variable>"
+    When the message is processed
+    Then I do not deliver an email to "blinkbox_test+johndoe@gmail.com"
+    And the message is rejected
+
+  Examples:
+    | missing_variable      |
+    | recipient             |
+    | salutation            |
