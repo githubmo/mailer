@@ -15,7 +15,6 @@ Feature: Sending a password changed email
     And it has the subject "Password change confirmation for your blinkbox books account."
     And the html component matches the example output "password_change.example.html"
 
-
   Scenario Outline: Receipt email generation fails when missing variable
     But I do not provide the variable "<missing_variable>"
     When the message is processed
@@ -23,6 +22,6 @@ Feature: Sending a password changed email
     And the message is rejected
 
     Examples:
-      | missing_variable      |
-      | recipient             |
-      | salutation            |
+      | missing_variable |
+      | recipient        |
+      | salutation       |
