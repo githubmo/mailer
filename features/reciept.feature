@@ -16,9 +16,9 @@ Feature: Sending a receipt after purchasing an item
 
   Scenario: Generating an email from a template and provided variables
     When the message is processed
-    Then I deliver an email to "blinkbox_test+johndoe@gmail.com"
-    And it has the subject "Thank you for choosing blinkbox"
-    And the html component matches the output "reciept.output"
+    Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
+    And it has the subject "Thank you for choosing blinkbox."
+    And the html component matches the example output "reciept.example.html"
 
   Scenario Outline: Receipt email generation fails when missing variable
     But I do not provide the variable "<missing_variable>"

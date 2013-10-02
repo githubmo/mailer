@@ -11,9 +11,9 @@ Feature: Sending a welcome email
     And it has the template variables:
       | salutation | John |
     When the message is processed
-    Then I deliver an email to "blinkbox_test+jondoe@gmail.com"
+    Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
     And it has the subject "Welcome to blinkbox books, John"
-    And the html component matches the output "welcome.output"
+    And the html component matches the example output "welcome.example.html"
 
   Scenario Outline: Receipt email generation fails when missing variable
     But I do not provide the variable "<missing_variable>"
