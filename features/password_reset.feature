@@ -3,7 +3,7 @@ Feature: Sending a password reset email
   I want to be able to send a password reset email to a user with the user's variables
   So that the user can receive a personalised templated email asking him to reset
 
-  Scenario: Sending a password reset email with link when given the correct template variable
+  Background:
     Given a "password reset" email message is pending processing
     And it has the recipients:
       | type | name     | email                           |
@@ -11,6 +11,8 @@ Feature: Sending a password reset email
     And it has the template variables:
       | salutation | John |
       | resetLink  | https://example.com/reset-john |
+
+  Scenario: Sending a password reset email with link when given the correct template variable
     When the message is processed
     Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
     And it has the subject "Password reset for your blinkbox books account."
