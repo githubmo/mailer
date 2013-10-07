@@ -6,13 +6,14 @@ Feature: Sending a password confirmed email
   Background:
     Given a "password change" email message is pending processing
     And it has the recipients:
-    | type | name     | email                           |
-    | to   | John Doe | blinkbox_test+johndoe@gmail.com |
+      | type | name     | email                           |
+      | to   | John Doe | blinkbox_test+johndoe@gmail.com |
     And it has the template variables:
-    | salutation | John |
+      | salutation         | John                                                |
 
+  @wip
   Scenario: Sending a password confirmed email when given correct template variables
-    # Please note that the names are not homogeneous as the template is called "password change(d)?" from UX
+  # Please note that the names are not homogeneous as the template is called "password change(d)?" from UX
     When the message is processed
     Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
     And it has the subject "Password change confirmation for your blinkbox books account."

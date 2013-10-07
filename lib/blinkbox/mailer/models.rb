@@ -16,11 +16,11 @@ module Blinkbox
         end
       end
 
-      def reset_password(variables = {})
+      def password_reset(variables = {})
         @variables = Locals.new(variables)
         mail(
           to: variables['to'],
-          subject: variables['subject'] || "Password reset"
+          subject: variables['subject'] || "Password reset for your blinkbox books account"
         ) do |format|
           format.html
           format.text

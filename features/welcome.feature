@@ -11,6 +11,7 @@ Feature: Sending a welcome email
     And it has the template variables:
       | salutation | John |
 
+  @wip
   Scenario: Generating an email from a template and provided variables
     When the message is processed
     Then an email is delivered to "blinkbox_test+jondoe@gmail.com"

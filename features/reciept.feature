@@ -14,6 +14,7 @@ Feature: Sending a receipt after purchasing an item
       | author     | Herman Melville |
       | price      | 0.17            |
 
+  @wip
   Scenario: Generating an email from a template and provided variables
     When the message is processed
     Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
