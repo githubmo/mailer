@@ -11,6 +11,9 @@ Feature: A service which will watch a queue for emails needing to be sent and de
   @in_proc
   Scenario: Logging an error if required template variables are not present
     Given I am not using a template
-    When I am given the sender email as "test@blinkbox.com"
-    Then I do not get an email produced
+    And it has the recipients:
+      | type | name     | email                           |
+      | to   | John Doe | blinkbox_test+johndoe@gmail.com |
+    When the message is processed
+    Then I do not deliver an email to "blinkbox_test+johndoe@gmail.com"
     And I get a message sent the "DLQ" queue

@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../../')
 require 'lib/blinkbox/mailer'
 require 'features/support/bunny-events-mock'
+require 'stringio'
 
 propfile = "features/support/mailer.properties.test"
 unless File.exist?(propfile)
@@ -12,7 +13,8 @@ require 'java_properties'
 options = JavaProperties::Properties.new(propfile)
 
 require 'logger'
-options['logger'] = Logger.new($stdout)
+stdout = StringIO.new
+options['logger'] = Logger.new(stdout) # replace with $stdout if you want the errors displayed in the command line
 $example_outputs_location = File.expand_path('features/support/example_outputs')
 
 

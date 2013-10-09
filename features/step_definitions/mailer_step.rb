@@ -4,6 +4,11 @@ Given(/^a "([^"]*)" email message is pending processing$/) do |template|
   @options[:template.to_s] = @template
 end
 
+Given(/^I am not using a template$/) do
+  @template = nil
+  @options = {}
+end
+
 Given(/^it has the recipients:$/) do |table|
 
   table.hashes.each do |recipient|
@@ -61,4 +66,9 @@ end
 
 Then(/^I do not deliver an email to "(.*)"$/) do |email|
   expect(ActionMailer::Base.deliveries.size).to eq 0
+end
+
+Then(/^I get a message sent the "([^"]*)" queue$/) do |queue_suffix|
+  deliver_id = $nacked.pop
+  expect(deliver_id).to eq @delivery_id
 end
