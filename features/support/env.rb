@@ -2,7 +2,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../../')
 require 'lib/blinkbox/mailer'
 require 'features/support/bunny-events-mock'
 
-propfile = "features/support/mailer.testing.properties"
+propfile = "features/support/mailer.properties.test"
 unless File.exist?(propfile)
   $stderr.puts "No properties file found."
   Process.exit(-1)
