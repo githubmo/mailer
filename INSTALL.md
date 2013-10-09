@@ -12,6 +12,6 @@
 3. Run the following commands:
 
 ```
-bundle install --without development test
+bundle install --deployment --without development test
 bundle exec ruby ./bin/blinkbox-mailer
 ```

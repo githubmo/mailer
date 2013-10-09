@@ -58,7 +58,7 @@ module Blinkbox
       def process_mail(delivery_info, email_variables)
         begin
 
-          raise RuntimeError, "No recipient specified" unless email_variables['to']
+          raise RuntimeError, "No recipient specified" unless email_variables['to'].any?
 
           unless Blinkbox::Mailer::Customer.action_methods.include? email_variables['template']
             raise RuntimeError, "No such email template '#{email_variables['template']}'"

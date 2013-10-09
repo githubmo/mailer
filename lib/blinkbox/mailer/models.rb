@@ -38,7 +38,6 @@ module Blinkbox
 
       def prepare_recipient(recipients)
         recipients.collect do |recipient|
-          # Greg has written/used some good email validity check code
           if recipient['name'].nil? || recipient['name'].empty?
             recipient['email']
           else

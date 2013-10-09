@@ -21,3 +21,17 @@ describe Blinkbox::Mailer::XmlParser do
     expect(hash).to eq expected_hash
   end
 end
+
+    { "template" => "receipt",
+      "to" => [{ "name" => "John Doe", "email" => "john.doe@example.com" }],
+      "cc" =>
+        [
+          { "name" => "John Doe", "email" => "john.doe.alt.mail@example.com" }],
+      "bcc" =>
+        [
+          { "name" => "Email Auditor", "email" => "email.audit@blinkbox.com" }],
+      "templateVariables" =>
+        { "salutation" => "John",
+          "bookTitle" => "Moby Dick",
+          "author" => "Herman Melville",
+          "price" => "0.17" } }
