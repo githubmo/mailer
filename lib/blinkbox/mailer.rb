@@ -50,7 +50,7 @@ module Blinkbox
         queue.subscribe(ack: true, block: true) do |delivery_info, metadata, payload|
 
           @log.info "Received message (##{delivery_info.delivery_tag})"
-          email_variables = Blinkbox::Mailer::XmlParser(payload)
+          email_variables = Blinkbox::Mailer::XmlParser.get_vars_from_xml(payload)
           process_mail(delivery_info, email_variables)
         end
       end

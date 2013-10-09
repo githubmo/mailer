@@ -18,9 +18,8 @@ Given(/^it has the template variables:$/) do |table|
   table.raw.each {|k,v| @options['templateVariables'][k] = v}
 end
 
-When(/^I do not provide the missing variable "([^"]*)"$/) do |template_variable|
+When(/^I do not provide the template variable "([^"]*)"$/) do |template_variable|
   # The template_variable will either be in the root of the hash or inside the templateVariables sub hash
-  @options.delete template_variable
   @options["templateVariables"].delete template_variable
 end
 
@@ -46,17 +45,17 @@ Then(/^it has the subject "(.*)"$/) do |subject|
   expect(@email.subject).to eq subject
 end
 
-Then(/^the html component matches the example output "(.*?)"$/) do |file|
+Then(/^the html and text component matches the example output "(.*?)"$/) do |file|
   # test the html part, ignoring any whitespace
   output_example_html_file = File.open("#{$example_outputs_location}/#{file}.example.html") {|file| file.read}
-  expected_html = output_example_html_file.gsub(/\s+/, "")
-  html_body = @email.html_part.body.raw_source.gsub(/\s+/, "")
+  expected_html = output_example_html_file
+  html_body = @email.html_part.body.raw_source
   expect(html_body).to eq (expected_html)
 
   # test the plain text part, ignoring any white space
   output_example_txt_file = File.open("#{$example_outputs_location}/#{file}.example.txt") {|file| file.read}
-  expected_txt = output_example_txt_file.gsub(/\s+/, "")
-  body = @email.body.parts[0].body.raw_source.gsub(/\s+/, "")
+  expected_txt = output_example_txt_file
+  body = @email.text_part.body.raw_source
   expect(body).to eq (expected_txt)
 end
 

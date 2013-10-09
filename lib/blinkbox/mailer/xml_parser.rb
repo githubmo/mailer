@@ -5,8 +5,7 @@ module Blinkbox
 
     class XmlParser
 
-      META_DATA=%w(xmlns xmlns:r r:originator r:instance r:messageId)
-
+      META_DATA=%w(xmlns xmlns: :originator :instance :messageId)
 
       # Given an XML that complies with out schema, found at the below url:
       #   url => https://tools.mobcastdev.com/confluence/display/PT/Mailer+-+Email+templating+and+sending
@@ -85,17 +84,20 @@ module Blinkbox
       #      "bookTitle" => "Moby Dick",
       #      "author" => "Herman Melville",
       #      "price" => "0.17" } }
+      #
+      # PLEASE NOTE: The template variables are in camel case instead of snake case as that is the convention for XML
+      # and the decision was made to preserve the name as it appears in the XML
       def self.get_vars_from_xml(xml)
         # Get the hash from the xml and extract away all the extra metadata we don't need.
         hash = Hash.from_xml(xml)
         hash = hash["sendEmail"]
-        hash = hash.select {|k,v| !META_DATA.include? k}
+        hash = hash.select {|k,v| META_DATA.select{ |w| Regexp.new(w).match(k)}.empty? }
 
         %w{to cc bcc}.each do |send_verb|
           array = []
           hash[send_verb].each_value do |recipeint|
             array << recipeint
-          end
+          end if hash[send_verb]
           hash[send_verb] = array
         end
 

@@ -6,46 +6,44 @@ module Blinkbox
       default from: "blinkbox books <maildev.blinkboxbooks@gmail.com>"
 
       def welcome(variables = {})
-        @variables = Locals.new(variables["templateVariables"])
-        mail(
-          to: variables['to'][0]['email'],
-          subject: variables['subject'] || "Welcome to blinkbox books"
-        ) do |format|
-          format.html
-          format.text
-        end
+        generate_email variables, "Welcome to blinkbox books"
       end
 
+
+
       def receipt(variables = {})
-        @variables = Locals.new(variables["templateVariables"])
-        mail(
-          to: variables['to'][0]['email'],
-          subject: variables['subject'] || "Thank you for choosing blinkbox."
-        ) do |format|
-          format.html
-          format.text
-        end
+        generate_email variables, "Thank you for choosing blinkbox."
       end
 
       def password_confirmed(variables = {})
+        generate_email variables, "Password change confirmation for your blinkbox books account."
+      end
+
+      def password_reset(variables = {})
+        generate_email variables, "Password reset for your blinkbox books account"
+      end
+
+      private
+
+      def generate_email(variables, default_subject)
         @variables = Locals.new(variables["templateVariables"])
         mail(
-          to: variables['to'][0]['email'],
-          subject: variables['subject'] || "Password change confirmation for your blinkbox books account."
+          to: prepare_recipient(variables['to']),
+          subject: variables['subject'] || default_subject
         ) do |format|
           format.html
           format.text
         end
       end
 
-      def password_reset(variables = {})
-        @variables = Locals.new(variables["templateVariables"])
-        mail(
-          to: variables['to'][0]['email'],
-          subject: variables['subject'] || "Password reset for your blinkbox books account"
-        ) do |format|
-          format.html
-          format.text
+      def prepare_recipient(recipients)
+        recipients.collect do |recipient|
+          # Greg has written/used some good email validity check code
+          if recipient['name'].nil? || recipient['name'].empty?
+            recipient['email']
+          else
+            "\"#{recipient['name']}\" <#{recipient['email']}>"
+          end
         end
       end
     end
