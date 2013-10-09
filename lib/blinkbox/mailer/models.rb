@@ -3,27 +3,48 @@ module Blinkbox
     class Customer < ActionMailer::Base
       layout 'october_launch'
 
-      default from: "blinkbox books <maildev.blinkboxbooks@gmail.com>"
+      default from: "blinkbox books <no_reply@blinkbox.com>"
 
-      def welcome_to_blinkbox_books(variables = {})
-        @variables = Locals.new(variables)
+      def welcome(variables = {})
+        generate_email variables, "Welcome to blinkbox books"
+      end
+
+
+
+      def receipt(variables = {})
+        generate_email variables, "Thank you for choosing blinkbox."
+      end
+
+      def password_confirmed(variables = {})
+        generate_email variables, "Password change confirmation for your blinkbox books account."
+      end
+
+      def password_reset(variables = {})
+        generate_email variables, "Password reset for your blinkbox books account"
+      end
+
+      private
+
+      def generate_email(variables, default_subject)
+        @variables = Locals.new(variables["templateVariables"])
         mail(
-          to: variables['to'],
-          subject: variables['subject'] || "Welcome to blinkbox books"
+          to: prepare_recipient(variables['to']),
+          subject: variables['subject'] || default_subject
         ) do |format|
           format.html
           format.text
         end
+        message_id = variables.select{ |k,v| k.include? ":messageId"}[0]
+        headers['X-bbb-message-id'] = message_id
       end
 
-      def reset_password(variables = {})
-        @variables = Locals.new(variables)
-        mail(
-          to: variables['to'],
-          subject: variables['subject'] || "Password reset"
-        ) do |format|
-          format.html
-          format.text
+      def prepare_recipient(recipients)
+        recipients.collect do |recipient|
+          if recipient['name'].nil? || recipient['name'].empty?
+            recipient['email']
+          else
+            "\"#{recipient['name']}\" <#{recipient['email']}>"
+          end
         end
       end
     end

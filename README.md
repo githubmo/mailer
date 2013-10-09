@@ -6,15 +6,89 @@ This is a simple ruby application which sits and listens to a message queue for 
 
 ### Message format
 
-Currently the message format expected is JSON:
+Currently the message format expected is XML:
+
+```xml
+
+<sendEmail
+        xmlns="http://schemas.blinkbox.com/books/emails/sending/v1"
+        xmlns:r="http://schemas.blinkbox.com/books/routing/v1"
+        r:originator="bookStore"
+        r:instance="book-store.mobcast.co.uk"
+        r:messageId="9678170f7c21-47dc-d8f3-a60f-c73e4c58">
+
+  <template>receipt</template>
+
+  <to>
+    <!-- must contain at least one recipient element -->
+    <recipient>
+      <name>John Doe</name>
+      <email>john.doe@example.com</email>
+    </recipient>
+  </to>
+
+  <!-- cc and bcc are optional -->
+  <cc>
+    <!-- must contain at least one recipient element -->
+    <recipient>
+      <name>John Doe</name>
+      <email>john.doe.alt.mail@example.com</email>
+    </recipient>
+  </cc>
+  <bcc>
+    <!-- must contain at least one recipient element -->
+    <recipient>
+      <name>Email Auditor</name>
+      <email>email.audit@blinkbox.com</email>
+    </recipient>
+  </bcc>
+
+  <templateVariables>
+    <templateVariable>
+      <key>salutation</key>
+      <value>John</value>
+    </templateVariable>
+
+    <templateVariable>
+      <key>bookTitle</key>
+      <value>Moby Dick</value>
+    </templateVariable>
+
+    <templateVariable>
+      <key>author</key>
+      <value>Herman Melville</value>
+    </templateVariable>
+
+    <templateVariable>
+      <key>price</key>
+      <value>0.17</value>
+    </templateVariable>
+  </templateVariables>
+
+</sendEmail>
+```
+
+Which produces the following hash:
 
     {
-      "to": "jphastings@blinkbox.com",
-      "template": "welcome_to_blinkbox_books",
-      "first_name": "JP"
+      "template" => "receipt",
+      "to" => [{ "name" => "John Doe", "email" => "john.doe@example.com" }],
+      "cc" =>
+        [
+          { "name" => "John Doe", "email" => "john.doe.alt.mail@example.com" }],
+      "bcc" =>
+        [
+          { "name" => "Email Auditor", "email" => "email.audit@blinkbox.com" }
+        ],
+      "templateVariables" =>
+        { "salutation" => "John",
+          "bookTitle" => "Moby Dick",
+          "author" => "Herman Melville",
+          "price" => "0.17" } 
+        }
     }
 
-This will render the email templates `welcome_to_blinkbox_books.text.erb` and `welcome_to_blinkbox_books.html.erb` and will deliver a multipart email to the given email address.
+This will render the email templates `welcome.erb` and `welcome.erb` and will deliver a multipart email to the given email address.
 
 ### Writing templates
 
@@ -22,7 +96,7 @@ Templates are named after the delivery methods defined in `models.rb`. Default o
 
 To access the variables sent in the message in a template you need to use [ERB](http://rrn.dk/rubys-erb-templating-system). Outputing a variable can be done with `<%=@variables.name_of_variable%>`, the `@variables` object will raise an error if the variable you're looking for isn't in the message (and thus prevent the email from being sent), so if you want to prevent this you need to `rescue`:
 
-    Hey there <%=(@variables.first_name rescue 'dude')%>,
+    Hey there <%=(@variables.salutation rescue 'dude')%>,
 
 ### Executing the app
 

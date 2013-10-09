@@ -1,5 +1,5 @@
 mq = amqp://guest:guest@127.0.0.1:5672
-smtp_server    = smtp.gmail.com
+smtp_server    = something
 smtp_port      = 587
 smtp_username  = <required>
 smtp_password  = <required>
