@@ -6,7 +6,69 @@ This is a simple ruby application which sits and listens to a message queue for 
 
 ### Message format
 
-Currently the message format expected is JSON:
+Currently the message format expected is XML:
+
+```xml
+
+<sendEmail
+        xmlns="http://schemas.blinkbox.com/books/emails/sending/v1"
+        xmlns:r="http://schemas.blinkbox.com/books/routing/v1"
+        r:originator="bookStore"
+        r:instance="book-store.mobcast.co.uk"
+        r:messageId="9678170f7c21-47dc-d8f3-a60f-c73e4c58">
+
+  <template>receipt</template>
+
+  <to>
+    <!-- must contain at least one recipient element -->
+    <recipient>
+      <name>John Doe</name>
+      <email>john.doe@example.com</email>
+    </recipient>
+  </to>
+
+  <!-- cc and bcc are optional -->
+  <cc>
+    <!-- must contain at least one recipient element -->
+    <recipient>
+      <name>John Doe</name>
+      <email>john.doe.alt.mail@example.com</email>
+    </recipient>
+  </cc>
+  <bcc>
+    <!-- must contain at least one recipient element -->
+    <recipient>
+      <name>Email Auditor</name>
+      <email>email.audit@blinkbox.com</email>
+    </recipient>
+  </bcc>
+
+  <templateVariables>
+    <templateVariable>
+      <key>salutation</key>
+      <value>John</value>
+    </templateVariable>
+
+    <templateVariable>
+      <key>bookTitle</key>
+      <value>Moby Dick</value>
+    </templateVariable>
+
+    <templateVariable>
+      <key>author</key>
+      <value>Herman Melville</value>
+    </templateVariable>
+
+    <templateVariable>
+      <key>price</key>
+      <value>0.17</value>
+    </templateVariable>
+  </templateVariables>
+
+</sendEmail>
+```
+
+Which produces the following hash:
 
     {
       "template" => "receipt",
