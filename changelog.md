@@ -1,6 +1,8 @@
 #Mailer Changelog
 
-### 2013-10-09 15:48
+## 1.0.0 (2013-10-09 15:48)
+
+### Features
 - An end to end mailing working including:
   - Listening on the Email.Outgoing queue
   - Transferring XML given to us from RabbitMQ into Hash
