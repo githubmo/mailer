@@ -1,11 +1,12 @@
 require "active_support/core_ext/hash/conversions"
 
+# todo: use a deserialiser onto a ruby object.
 module Blinkbox
   module Mailer
 
     class XmlParser
 
-      META_DATA=%w(xmlns xmlns: :originator :instance :messageId)
+      META_DATA=%w(^xmlns$ ^xmlns: :originator$ :instance$ :messageId$).map {|w| Regexp.new(w)}
 
       # Given an XML that complies with out schema, found at the below url:
       #   url => https://tools.mobcastdev.com/confluence/display/PT/Mailer+-+Email+templating+and+sending
@@ -91,7 +92,7 @@ module Blinkbox
         # Get the hash from the xml and extract away all the extra metadata we don't need.
         hash = Hash.from_xml(xml)
         hash = hash["sendEmail"]
-        hash = hash.select {|k,v| META_DATA.select{ |w| Regexp.new(w).match(k)}.empty? }
+        hash = hash.select {|k,v| META_DATA.select{ |regexp| regexp.match(k)}.empty? }
 
         %w{to cc bcc}.each do |send_verb|
           array = []
