@@ -3,7 +3,7 @@ module Blinkbox
     class Customer < ActionMailer::Base
       layout 'october_launch'
 
-      default from: "blinkbox books <maildev.blinkboxbooks@gmail.com>"
+      default from: "blinkbox books <no_reply@blinkbox.com>"
 
       def welcome(variables = {})
         generate_email variables, "Welcome to blinkbox books"
@@ -34,6 +34,8 @@ module Blinkbox
           format.html
           format.text
         end
+        message_id = variables.select{ |k,v| k.include? ":messageId"}[0]
+        headers['X-bbb-message-id'] = message_id
       end
 
       def prepare_recipient(recipients)

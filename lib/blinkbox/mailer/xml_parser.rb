@@ -6,7 +6,7 @@ module Blinkbox
 
     class XmlParser
 
-      META_DATA=%w(^xmlns$ ^xmlns: :originator$ :instance$ :messageId$).map {|w| Regexp.new(w)}
+      META_DATA=%w(^xmlns$ ^xmlns: :originator$ :instance$).map {|w| Regexp.new(w)}
 
       # Given an XML that complies with out schema, found at the below url:
       #   url => https://tools.mobcastdev.com/confluence/display/PT/Mailer+-+Email+templating+and+sending
