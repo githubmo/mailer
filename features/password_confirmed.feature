@@ -4,7 +4,7 @@ Feature: Sending a password confirmed email
   So that the user is informed that his password change was successful
 
   Background:
-    Given a "password change" email message is pending processing
+    Given a "password confirmed" email message is pending processing
     And it has the recipients:
       | type | name     | email                           |
       | to   | John Doe | blinkbox_test+johndoe@gmail.com |
@@ -17,15 +17,15 @@ Feature: Sending a password confirmed email
     When the message is processed
     Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
     And it has the subject "Password change confirmation for your blinkbox books account."
-    And the html component matches the example output "password_change.example.html"
+    And the html component matches the example output "password_confirmed"
 
-  Scenario Outline: Receipt email generation fails when missing variable
-    But I do not provide the variable "<missing_variable>"
+  Scenario Outline: Receipt email generation fails when missing a required variable
+    But I do not provide the missing variable "<missing_variable>"
     When the message is processed
     Then I do not deliver an email to "blinkbox_test+johndoe@gmail.com"
     And the message is rejected
 
     Examples:
       | missing_variable |
-      | recipient        |
+      | to               |
       | salutation       |

@@ -5,10 +5,10 @@ module Blinkbox
 
       default from: "blinkbox books <maildev.blinkboxbooks@gmail.com>"
 
-      def welcome_to_blinkbox_books(variables = {})
-        @variables = Locals.new(variables)
+      def welcome(variables = {})
+        @variables = Locals.new(variables["templateVariables"])
         mail(
-          to: variables['to'],
+          to: variables['to'][0]['email'],
           subject: variables['subject'] || "Welcome to blinkbox books"
         ) do |format|
           format.html
@@ -16,10 +16,32 @@ module Blinkbox
         end
       end
 
-      def password_reset(variables = {})
-        @variables = Locals.new(variables)
+      def receipt(variables = {})
+        @variables = Locals.new(variables["templateVariables"])
         mail(
-          to: variables['to'],
+          to: variables['to'][0]['email'],
+          subject: variables['subject'] || "Thank you for choosing blinkbox."
+        ) do |format|
+          format.html
+          format.text
+        end
+      end
+
+      def password_confirmed(variables = {})
+        @variables = Locals.new(variables["templateVariables"])
+        mail(
+          to: variables['to'][0]['email'],
+          subject: variables['subject'] || "Password change confirmation for your blinkbox books account."
+        ) do |format|
+          format.html
+          format.text
+        end
+      end
+
+      def password_reset(variables = {})
+        @variables = Locals.new(variables["templateVariables"])
+        mail(
+          to: variables['to'][0]['email'],
           subject: variables['subject'] || "Password reset for your blinkbox books account"
         ) do |format|
           format.html

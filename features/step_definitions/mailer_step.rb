@@ -1,23 +1,32 @@
 Given(/^a "([^"]*)" email message is pending processing$/) do |template|
-  @template = template
+  @template = template.gsub(/\s+/, '_')
   @options = {}
   @options[:template.to_s] = @template
 end
 
-When(/^I do not provide the variable "([^"]*)"$/) do |template_variable|
-  @options.delete template_variable
+Given(/^it has the recipients:$/) do |table|
+
+  table.hashes.each do |recipient|
+    (@options[recipient.delete("type")] ||= []).push recipient
+  end
+  @options
 end
 
-When(/^it has the recipients:$/) do |table|
-  # table is a | to   | John Doe | blinkbox_test+johndoe@gmail.com |
-  to = {"recipient" => {}}
-  to["recipient"][:name.to_s] = table.hashes[0][:name.to_s]
-  to["recipient"][:email.to_s] = table.hashes[0][:email.to_s]
-  @options[:to.to_s] = to
-end
-When(/^it has the template variables:$/) do |table|
+Given(/^it has the template variables:$/) do |table|
   # table example | salutation | John |
-  table.raw.each {|k,v| @options[k] = v}
+  @options['templateVariables'] = {}
+  table.raw.each {|k,v| @options['templateVariables'][k] = v}
+end
+
+When(/^I do not provide the missing variable "([^"]*)"$/) do |template_variable|
+  # The template_variable will either be in the root of the hash or inside the templateVariables sub hash
+  @options.delete template_variable
+  @options["templateVariables"].delete template_variable
+end
+
+When(/^the message is rejected$/) do
+  delivery_id = $nacked.pop
+  expect(delivery_id ).to eq @delivery_id
 end
 
 When(/^the message is processed$/) do
@@ -28,8 +37,9 @@ When(/^the message is processed$/) do
 end
 
 Then(/^an email is delivered to "(.*)"$/) do |email_address|
-  expect(ActionMailer::Base.deliveries.size == 1)
-  @email = ActionMailer::Base.deliveries.pop
+  number_of_emails_delivered = ActionMailer::Base.deliveries.size
+  @email = ActionMailer::Base.deliveries.pop rescue nil # We always want to pop between tests
+  expect(number_of_emails_delivered).to eq 1
 end
 
 Then(/^it has the subject "(.*)"$/) do |subject|
@@ -51,10 +61,5 @@ Then(/^the html component matches the example output "(.*?)"$/) do |file|
 end
 
 Then(/^I do not deliver an email to "(.*)"$/) do |email|
-  expect(ActionMailer::Base.deliveries.size == 0)
-end
-
-When(/^the message is rejected$/) do
-  delivery_id = $nacked.pop
-  expect(delivery_id ).to eq @delivery_id
+  expect(ActionMailer::Base.deliveries.size).to eq 0
 end

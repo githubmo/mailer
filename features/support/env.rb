@@ -2,7 +2,6 @@ $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../../')
 require 'lib/blinkbox/mailer'
 require 'features/support/bunny-events-mock'
 require 'features/support/actionmailer_intercepter'
-require 'nokogiri'
 
 propfile = "features/support/mailer.testing.properties"
 unless File.exist?(propfile)

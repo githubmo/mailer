@@ -1,4 +1,4 @@
-require "active_support/all"
+require "active_support/core_ext/hash/conversions"
 
 module Blinkbox
   module Mailer
@@ -72,25 +72,32 @@ module Blinkbox
       #
       # Into the following hash:
       #
-      #{
-      #  "template"=>"receipt",
-      #  "to"=>{"recipient"=>{"name"=>"John Doe", "email"=>"john.doe@example.com"}},
-      #  "cc"=>
-      #  {"recipient"=>
-      #     {"name"=>"John Doe", "email"=>"john.doe.alt.mail@example.com"}},
-      #  "bcc"=>
-      #  {"recipient"=>
-      #     {"name"=>"Email Auditor", "email"=>"email.audit@blinkbox.com"}},
-      #  "salutation"=>"John",
-      #  "bookTitle"=>"Moby Dick",
-      #  "author"=>"Herman Melville",
-      #  "price"=>"0.17"
-      #}
+      #{ "template" => "receipt",
+      #  "to" => [{ "name" => "John Doe", "email" => "john.doe@example.com" }],
+      #  "cc" =>
+      #    [
+      #      { "name" => "John Doe", "email" => "john.doe.alt.mail@example.com" }],
+      #  "bcc" =>
+      #    [
+      #      { "name" => "Email Auditor", "email" => "email.audit@blinkbox.com" }],
+      #  "templateVariables" =>
+      #    { "salutation" => "John",
+      #      "bookTitle" => "Moby Dick",
+      #      "author" => "Herman Melville",
+      #      "price" => "0.17" } }
       def self.get_vars_from_xml(xml)
         # Get the hash from the xml and extract away all the extra metadata we don't need.
         hash = Hash.from_xml(xml)
         hash = hash["sendEmail"]
         hash = hash.select {|k,v| !META_DATA.include? k}
+
+        %w{to cc bcc}.each do |send_verb|
+          array = []
+          hash[send_verb].each_value do |recipeint|
+            array << recipeint
+          end
+          hash[send_verb] = array
+        end
 
         # Extract the template variables from {{key: "h_key", value: "h_value"}} to {{"h_key" => "h_value"}}
         template_variables = hash["templateVariables"]["templateVariable"]
@@ -98,8 +105,9 @@ module Blinkbox
 
         # Remove templateVariables and add each entry template_variable entry to the hash
         hash.delete "templateVariables"
+        hash["templateVariables"] = {}
         template_variables.each do |entry|
-          hash.merge! entry
+          hash["templateVariables"].merge! entry
         end
 
         # Return the final hash

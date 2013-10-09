@@ -19,8 +19,8 @@ Feature: Sending a password reset email
     And it has the subject "Password reset for your blinkbox books account"
     And the html component matches the example output "password_reset"
 
-  Scenario Outline: Receipt email generation fails when missing variable
-    But I do not provide the variable "<missing_variable>"
+  Scenario Outline: Receipt email generation fails when missing a required variable
+    But I do not provide the missing variable "<missing_variable>"
     When the message is processed
     Then I do not deliver an email to "blinkbox_test+johndoe@gmail.com"
     And the message is rejected

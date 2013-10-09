@@ -1,0 +1,11 @@
+Hi John,
+Thank you for using our service. Below are the details of your purchase.
+
+Title: Moby Dick
+Author: Herman Melville
+Price: £0.17
+
+Thanks,
+blinkbox books
+
+This is a footer boilerplate that goes out on all text emails.
