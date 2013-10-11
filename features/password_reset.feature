@@ -10,7 +10,7 @@ Feature: Sending a password reset email
       | to   | John Doe | blinkbox_test+johndoe@gmail.com |
     And it has the template variables:
       | salutation         | John                                                |
-      | reset_password_url | http://blinkbox.com/example_password_reset_url.html |
+      | resetLink | http://blinkbox.com/example_password_reset_url.html |
 
   Scenario: Sending a password reset email with link when given the correct template variable
     When the message is processed
@@ -27,4 +27,4 @@ Feature: Sending a password reset email
   Examples:
     | missing_variable   |
     | salutation         |
-    | reset_password_url |
+    | resetLink |
