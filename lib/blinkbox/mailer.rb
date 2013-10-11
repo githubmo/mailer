@@ -48,12 +48,25 @@ module Blinkbox
         )
 
         queue.subscribe(ack: true, block: true) do |delivery_info, metadata, payload|
-
           @log.info "Received message (##{delivery_info.delivery_tag})"
-          email_variables = Blinkbox::Mailer::XmlParser.get_vars_from_xml(payload)
-          process_mail(delivery_info, email_variables)
+          begin
+            email_variables = extract_variables(delivery_info, payload)
+            process_mail(delivery_info, email_variables) unless email_variables.nil?
+          rescue => e
+            @amqp[:channel].nack(delivery_info.delivery_tag, false)
+            @log.error "Failure to process message (##{delivery_info.delivery_tag}), rejected back to queue (#{e.message})"
+            @log.debug "#{e.class}: #{e.message}\n\t#{e.backtrace.join("\n\t")}"
+          end          
         end
       end
+
+      def extract_variables(delivery_info, payload)
+        Blinkbox::Mailer::XmlParser.get_vars_from_xml(payload) || {}
+      rescue REXML::ParseException
+        @amqp[:channel].nack(delivery_info.delivery_tag, false)
+        @log.error "The incoming message (##{delivery_info.delivery_tag}) was incorrectly formed and was rejected back to the queue"
+        nil
+      end    
 
       def process_mail(delivery_info, email_variables)
         begin
@@ -99,15 +112,6 @@ module Blinkbox
         rescue ActionView::Template::Error => e
           @amqp[:channel].nack(delivery_info.delivery_tag, false)
           @log.error "#{e.message} in the message (##{delivery_info.delivery_tag}) so it was rejected back to the queue"
-
-        rescue MultiJson::LoadError
-          @amqp[:channel].nack(delivery_info.delivery_tag, false)
-          @log.error "The incoming message (##{delivery_info.delivery_tag}) was incorrectly formed and was rejected back to the queue "
-
-        rescue Exception => e
-          @amqp[:channel].nack(delivery_info.delivery_tag, false)
-          @log.error "Failure to process message (##{delivery_info.delivery_tag}), rejected back to queue (#{e.message})"
-          @log.debug "#{e.class}: #{e.message}\n\t#{e.backtrace.join("\n\t")}"
         end
       end
 
