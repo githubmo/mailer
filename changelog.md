@@ -3,7 +3,7 @@
 ## 1.0.1 (2013-10-11 17:29)
 
 ### Bug Fixes
-- Fixed a bug for when recieing an XML with just one template variable, it is not processed correctly.
+- Fixed a bug for when receiving an XML with just one template variable, it is not processed correctly.
 
 ### Features
 - An end to end mailing working including:

@@ -94,8 +94,6 @@ module Blinkbox
         xml_hash = xml_hash["sendEmail"]
         xml_hash = xml_hash.select {|k,v| META_DATA.select{ |regexp| regexp.match(k)}.empty? }
 
-        p xml_hash
-
 
         %w{to cc bcc}.each do |send_verb|
           array = []
