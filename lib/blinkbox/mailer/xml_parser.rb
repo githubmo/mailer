@@ -90,31 +90,38 @@ module Blinkbox
       # and the decision was made to preserve the name as it appears in the XML
       def self.get_vars_from_xml(xml)
         # Get the hash from the xml and extract away all the extra metadata we don't need.
-        hash = Hash.from_xml(xml)
-        hash = hash["sendEmail"]
-        hash = hash.select {|k,v| META_DATA.select{ |regexp| regexp.match(k)}.empty? }
+        xml_hash = Hash.from_xml(xml)
+        xml_hash = xml_hash["sendEmail"]
+        xml_hash = xml_hash.select {|k,v| META_DATA.select{ |regexp| regexp.match(k)}.empty? }
+
 
         %w{to cc bcc}.each do |send_verb|
           array = []
-          hash[send_verb].each_value do |recipeint|
+          xml_hash[send_verb].each_value do |recipeint|
             array << recipeint
-          end if hash[send_verb]
-          hash[send_verb] = array
+          end if xml_hash[send_verb]
+          xml_hash[send_verb] = array
         end
 
         # Extract the template variables from {{key: "h_key", value: "h_value"}} to {{"h_key" => "h_value"}}
-        template_variables = hash["templateVariables"]["templateVariable"]
-        template_variables.map!{|entry| {entry["key"] => entry["value"]}}
+        template_variables = xml_hash["templateVariables"]["templateVariable"]
+        if template_variables.is_a? Hash # this means we got just as single variable
+          template_variables = [{template_variables["key"] => template_variables["value"]}]
+        elsif template_variables.is_a? Array # this means we have multiple variables
+          template_variables.map!{|entry| {entry["key"] => entry["value"]}}
+        else # this means we are screwed
+          raise "Could not extract the template variables from the XML."
+        end
 
         # Remove templateVariables and add each entry template_variable entry to the hash
-        hash.delete "templateVariables"
-        hash["templateVariables"] = {}
+        xml_hash.delete "templateVariables"
+        xml_hash["templateVariables"] = {}
         template_variables.each do |entry|
-          hash["templateVariables"].merge! entry
+          xml_hash["templateVariables"].merge! entry
         end
 
         # Return the final hash
-        hash
+        xml_hash
       end
 
     end
