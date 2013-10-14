@@ -1,9 +1,28 @@
-<p>Hi <%= @variables.salutation %>,</p>
-<p>Thank you for using our service. Below are the details of your purchase.</p>
+<table class="bbtable" cellpadding="6" cellspacing="0" border="0" bgcolor="#f5f2e9" width="600" align="center" style="border:solid 1px #dfdfdf;">
+  <tr>
+    <td width="100%">
+      <p style="font-weight: bold;"><font color="#000000"><strong>Hello <%= @variables.salutation %>,</strong></font></p></td></tr>
 
-<p>Title: <%= @variables.bookTitle %></p>
-<p>Author: <%= @variables.author %></p>
-<p>Price: £<%= @variables.price %></p>
+  <tr><td width="100%">
 
-<p>Thanks,<br/>
-blinkbox books</p>
+    <p style="margin-top:0"><font color="#000000">Thanks for choosing to use blinkbox books. Your book is shown below. We realise there are plenty of places to buy books, so we aim to make your reading experience simple and rewarding.</font></p></td></tr>
+
+  <tr><td width="100%">
+    <table class="bbtable" width="90%" align="center" height="2" bgcolor="#ffffff">
+      <tr width="100%">
+        <td width="50%" align="left">
+          <p style="margin-top:0"><font color="#000000"><%= @variables.bookTitle %><br /><%= @variables.author %></font></p>
+        </td>
+        <td width="50%" align="right">
+          <p style="margin-top:0"><font color="#000000">£<%= @variables.price %></font></p>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+  <tr><td width="100%">
+    <p style="margin-top:0"><font color="#000000">Your book is now saved in your cloud, your own personal digital library. Use the blinkbox books app to download your books and start reading on your tablet or smartphone.</font></p></td></tr>
+
+  <tr><td width="100%">
+
+    <p style="margin-top:0"><font color="#000000">Enjoy what you read!</font><br /><font color="#000000" style="font-style:italic; font-weight:bold;">The blinkbox books team</font></p></td></tr>
+</table>

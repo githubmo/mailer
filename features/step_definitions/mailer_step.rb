@@ -55,7 +55,8 @@ Then(/^the html and text component matches the example output "(.*?)"$/) do |fil
   output_example_html_file = File.open("#{$example_outputs_location}/#{file}.example.html") {|file| file.read}
   expected_html = output_example_html_file
   html_body = @email.html_part.body.raw_source
-  expect(html_body).to eq (expected_html)
+  #expect(html_body).to eq (expected_html)
+  expect(Hash.from_xml(html_body)).to eq(Hash.from_xml(expected_html))
 
   # test the plain text part, ignoring any white space
   output_example_txt_file = File.open("#{$example_outputs_location}/#{file}.example.txt") {|file| file.read}
