@@ -32,10 +32,6 @@ module Blinkbox
           :enable_starttls_auto => true
         }
 
-        @resource_server = {
-          :write => options[:resource_server_write],
-          :http => options[:resource_server_http]
-        }
       end
 
       def start
@@ -82,13 +78,11 @@ module Blinkbox
 
           view_online_path = File.join(*(root_folder + SecureRandom.hex(32).scan(/.{4}/))) + ".html"
 
-          local_filename = File.join(@resource_server[:write], view_online_path)
-
-          write_to_resource_server = false
+          # to-do include a way to view the email online.
 
           # ActionStrings track whether they've been used (as a string). This is so that we
           # only write the online copy of the email if a link to it was put in the email.
-          email_variables['view_online_url'] = ActionString.new(File.join(@resource_server[:http], view_online_path))
+          #email_variables['view_online_url'] = ActionString.new(File.join(@resource_server[:http], view_online_path))
 
           email = Blinkbox::Mailer::Customer.send(email_variables['template'], email_variables)
 
