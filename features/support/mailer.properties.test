@@ -4,4 +4,6 @@ smtp_port      = 587
 smtp_username  = test
 smtp_password  = test
 logger = /var/log/blinkbox/mailer.test.log
+resource_server_write = /mnt/distribution/
+resource_server_http = http://internal-media.mobcastdev.com/
 email_queue = Emails.Outbound

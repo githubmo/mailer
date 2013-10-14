@@ -8,4 +8,5 @@ group :development, :test do
   gem 'yarjuf'
   gem 'cucumber'
   gem 'rake'
+  gem 'equivalent-xml'
 end

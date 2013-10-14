@@ -27,4 +27,4 @@ Feature: Sending a password reset email
   Examples:
     | missing_variable   |
     | salutation         |
-    | resetLink |
+    | resetLink          |
