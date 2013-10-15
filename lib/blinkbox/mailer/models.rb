@@ -3,29 +3,28 @@ module Blinkbox
     class Customer < ActionMailer::Base
       layout 'october_launch'
 
-      default from: "blinkbox books <no_reply@blinkbox.com>"
+      default from: "blinkbox books <noreply@blinkboxbooks.com>"
 
       def welcome(variables = {})
         generate_email variables, "Welcome to blinkbox books"
       end
 
-
-
       def receipt(variables = {})
-        generate_email variables, "Thank you for choosing blinkbox."
+        generate_email variables, "Thank you for choosing blinkbox books"
       end
 
       def password_confirmed(variables = {})
-        generate_email variables, "Password change confirmation for your blinkbox books account."
+        generate_email variables, "Password change confirmation for your blinkbox books account"
       end
 
       def password_reset(variables = {})
-        generate_email variables, "Password reset for your blinkbox books account"
+        # this mail contains a password reset link which must not be click-tracked!
+        generate_email variables, "Password reset for your blinkbox books account", disable_click_tracking: true
       end
 
       private
 
-      def generate_email(variables, default_subject)
+      def generate_email(variables, default_subject, options = {})
         @variables = Locals.new(variables["templateVariables"])
         mail(
           to: prepare_recipient(variables['to']),
@@ -35,7 +34,10 @@ module Blinkbox
           format.text
         end
         message_id = variables.select{ |k,v| k.include? ":messageId"}[0]
-        headers['X-bbb-message-id'] = message_id
+        headers['X-BBB-Message-Id'] = message_id if message_id
+
+        # see http://help.mandrill.com/entries/21688056-Using-SMTP-Headers-to-customize-your-messages
+        headers['X-MC-Track'] = 'open' if options[:disable_click_tracking]
       end
 
       def prepare_recipient(recipients)
