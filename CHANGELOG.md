@@ -1,4 +1,10 @@
-#Mailer Changelog
+#Mailer Change Log
+
+## 1.0.2 (2013-10-15 17:49)
+
+### Bug Fixes
+- [CP-657](https://tools.mobcastdev.com/jira/browse/CP-657) Link clicks are not tracked on password reset emails.
+- The 'from' email address now uses the _blinkboxbooks.com_ domain, rather than _blinkbox.com_.
 
 ## 1.0.1 (2013-10-11 17:29)
 
