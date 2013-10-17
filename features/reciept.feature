@@ -17,7 +17,7 @@ Feature: Sending a receipt after purchasing an item
   Scenario: Generating an email from a template and provided variables
     When the message is processed
     Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
-    And it has the subject "Thank you for choosing blinkbox."
+    And it has the subject "Thank you for choosing blinkbox"
     And the html and text component matches the example output "receipt"
 
   Scenario Outline: Receipt email generation fails when missing a required variable
