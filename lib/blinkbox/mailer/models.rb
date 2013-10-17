@@ -10,16 +10,16 @@ module Blinkbox
       end
 
       def receipt(variables = {})
-        generate_email variables, "Thank you for choosing blinkbox books"
+        generate_email variables, "Thank you for choosing blinkbox"
       end
 
       def password_confirmed(variables = {})
-        generate_email variables, "Password change confirmation for your blinkbox books account"
+        generate_email variables, "Your blinkbox books password has been changed"
       end
 
       def password_reset(variables = {})
         # this mail contains a password reset link which must not be click-tracked!
-        generate_email variables, "Password reset for your blinkbox books account", disable_click_tracking: true
+        generate_email variables, "Resetting your blinkbox books password is easy", disable_click_tracking: true
       end
 
       private

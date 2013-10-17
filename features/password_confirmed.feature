@@ -15,7 +15,7 @@ Feature: Sending a password confirmed email
   # Please note that the names are not homogeneous as the template is called "password change(d)?" from UX
     When the message is processed
     Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
-    And it has the subject "Password change confirmation for your blinkbox books account."
+    And it has the subject "Your blinkbox books password has been changed"
     And the html and text component matches the example output "password_confirmed"
 
   Scenario Outline: Receipt email generation fails when missing a required variable
