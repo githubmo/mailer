@@ -16,11 +16,11 @@ module Blinkbox
       end
 
       def password_confirmed(variables = {})
-        generate_email variables, "Password change confirmation for your blinkbox books account."
+        generate_email variables, "Your blinkbox books password has been changed."
       end
 
       def password_reset(variables = {})
-        generate_email variables, "Password reset for your blinkbox books account"
+        generate_email variables, "Resetting your blinkbox books password is easy"
       end
 
       private
