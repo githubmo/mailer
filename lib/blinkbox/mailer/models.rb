@@ -10,11 +10,11 @@ module Blinkbox
       end
 
       def receipt(variables = {})
-        generate_email variables, "Thank you for choosing blinkbox"
+        generate_email variables, "Thanks for your purchase from blinkbox books!"
       end
 
       def password_confirmed(variables = {})
-        generate_email variables, "Your blinkbox books password has been changed"
+        generate_email variables, "Your password has been changed"
       end
 
       def password_reset(variables = {})
