@@ -1,5 +1,11 @@
 #Mailer Change Log
 
+## 1.0.3 (2013-10-23 11:35)
+
+### Bug Fix
+
+- Removing line breaks that causes issues in Outlook 2013
+
 ## 1.0.2 (2013-10-15 17:49)
 
 ### Bug Fixes
