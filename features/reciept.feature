@@ -13,12 +13,14 @@ Feature: Sending a receipt after purchasing an item
       | bookTitle  | Moby Dick       |
       | author     | Herman Melville |
       | price      | 0.17            |
+    And the sender is set to "tester <test@test.com>"
 
   Scenario: Generating an email from a template and provided variables
     When the message is processed
     Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
     And it has the subject "Thanks for your purchase from blinkbox books!"
     And the html and text component matches the example output "receipt"
+    And the sender is "test@test.com"
 
   Scenario Outline: Receipt email generation fails when missing a required variable
     But I do not provide the template variable "<missing_variable>"

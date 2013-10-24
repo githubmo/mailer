@@ -3,6 +3,7 @@ smtp_server    = something
 smtp_port      = 587
 smtp_username  = <required>
 smtp_password  = <required>
+email_sender = tester <test@test.com>
 logger = /var/log/blinkbox/mailer.log
 resource_server_write = /mnt/distribution/
 resource_server_http = http://internal-media.mobcastdev.com/

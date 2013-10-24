@@ -9,7 +9,8 @@ Feature: Sending a password confirmed email
       | type | name     | email                           |
       | to   | John Doe | blinkbox_test+johndoe@gmail.com |
     And it has the template variables:
-      | salutation         | John                                                |
+      | salutation         | John                         |
+    And the sender is set to "tester <test@test.com>"
 
   Scenario: Sending a password confirmed email when given correct template variables
   # Please note that the names are not homogeneous as the template is called "password change(d)?" from UX
@@ -17,6 +18,7 @@ Feature: Sending a password confirmed email
     Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
     And it has the subject "Your password has been changed"
     And the html and text component matches the example output "password_confirmed"
+    And the sender is "test@test.com"
 
   Scenario Outline: Receipt email generation fails when missing a required variable
     But I do not provide the template variable "<missing_variable>"
