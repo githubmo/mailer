@@ -79,5 +79,6 @@ Then(/^I get a message sent the "([^"]*)" queue$/) do |queue_suffix|
 end
 
 Then(/^the sender is "([^"]*)"$/) do |sender|
+  # There seems to be no way of getting the sender's name from the Mail::Message object as of actionmailer 4.0.0
   expect(@email.from[0]).to eq sender
 end
