@@ -23,7 +23,7 @@ Given(/^it has the template variables:$/) do |table|
   table.raw.each {|k,v| @options['templateVariables'][k] = v}
 end
 
-When(/^the sender is set to "([^"]*)"$/) do |sender|
+Given(/^the sender is set to "([^"]*)"$/) do |sender|
   @options["email_sender"] = sender
 end
 
@@ -78,6 +78,6 @@ Then(/^I get a message sent the "([^"]*)" queue$/) do |queue_suffix|
   expect(deliver_id).to eq @delivery_id
 end
 
-When(/^the sender is "([^"]*)"$/) do |sender|
+Then(/^the sender is "([^"]*)"$/) do |sender|
   expect(@email.from[0]).to eq sender
 end
