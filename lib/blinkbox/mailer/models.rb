@@ -28,7 +28,8 @@ module Blinkbox
         @variables = Locals.new(variables["templateVariables"])
         mail(
           to: prepare_recipient(variables['to']),
-          subject: variables['subject'] || default_subject
+          subject: variables['subject'] || default_subject,
+          from: variables["email_sender"] || default_params[:from]
         ) do |format|
           format.html
           format.text

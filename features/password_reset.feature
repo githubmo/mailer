@@ -10,13 +10,15 @@ Feature: Sending a password reset email
       | to   | John Doe | blinkbox_test+johndoe@gmail.com |
     And it has the template variables:
       | salutation         | John                                                |
-      | resetLink | http://blinkbox.com/example_password_reset_url.html |
+      | resetLink | http://blinkbox.com/example_password_reset_url.html          |
+    And the sender is set to "tester <test@test.com>"
 
   Scenario: Sending a password reset email with link when given the correct template variable
     When the message is processed
     Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
     And it has the subject "Resetting your blinkbox books password is easy"
     And the html and text component matches the example output "password_reset"
+    And the sender is "test@test.com"
 
   Scenario Outline: Receipt email generation fails when missing a required variable
     But I do not provide the template variable "<missing_variable>"

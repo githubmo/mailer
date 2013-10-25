@@ -23,6 +23,10 @@ Given(/^it has the template variables:$/) do |table|
   table.raw.each {|k,v| @options['templateVariables'][k] = v}
 end
 
+Given(/^the sender is set to "([^"]*)"$/) do |sender|
+  @options["email_sender"] = sender
+end
+
 When(/^I do not provide the template variable "([^"]*)"$/) do |template_variable|
   # The template_variable will either be in the root of the hash or inside the templateVariables sub hash
   @options["templateVariables"].delete template_variable
@@ -72,4 +76,9 @@ end
 Then(/^I get a message sent the "([^"]*)" queue$/) do |queue_suffix|
   deliver_id = $nacked.pop
   expect(deliver_id).to eq @delivery_id
+end
+
+Then(/^the sender is "([^"]*)"$/) do |sender|
+  # There seems to be no way of getting the sender's name from the Mail::Message object as of actionmailer 4.0.0
+  expect(@email.from[0]).to eq sender
 end
