@@ -1,5 +1,12 @@
 #Mailer Change Log
 
+## 1.0.4 (2013-11-04 11:56)
+
+### Enhancements
+
+- Better templates based on feedback from UI
+
+
 ## 1.0.3 (2013-10-23 11:35)
 
 ### Bug Fix
