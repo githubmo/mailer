@@ -1,5 +1,9 @@
 #Mailer Change Log
 
+## 1.0.5 (2013-11-06 14:10)
+
+- Changed the footer of the email templates to reflect the new address.
+
 ## 1.0.4 (2013-11-04 11:56)
 
 ### Enhancements
