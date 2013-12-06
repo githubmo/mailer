@@ -88,6 +88,15 @@
 
     @media only screen and (max-device-width: 480px) {
 
+      td[class="force-col"] {
+        display: block;
+        width: 100%;
+      }
+
+      td[class="rtl"]{
+        direction: rtl;
+      }
+
       body[yahoo] #container1 {
         display: block !important
       }
@@ -140,38 +149,53 @@
       alink="#2A5DB0" link="#2A5DB0" bgcolor="#FFFFFF" text="#000000" yahoo="fix">
 
 <div id="body_style" style="padding:15px">
-  <table class="bbtable" cellpadding="0" cellspacing="0" border="0" bgcolor="#004094" width="600" height="55"
-         align="center">
+  <table class="bbtable" cellpadding="0" cellspacing="0" bgcolor="#004094" width="600" height="55"
+         align="center" style="border:solid 5px #004094;">
     <tr>
       <td width="2%"></td>
-      <td width="190">
+      <td width="48%" align="left">
         <a href="https://www.blinkboxbooks.com/"><img
-            src="https://media.blinkboxbooks.com/params;v=0/assets/logos/blinkbox_books_beta_transparent_2013-10-14.png" alt="blinkbox books"
-            title="blinkbox books" width="137" height="38"
-            style="display:block" border="0"/></a></td>
-      <td></td>
+                src="https://media.blinkboxbooks.com/params;v=0/assets/logos/blinkbox_books_beta_transparent_2013-10-14.png"
+                alt="blinkbox books"
+                title="blinkbox books" width="137" height="38"
+                style="display:block" border="0"/></a></td>
+      <td width="48%" align="right" class="hideOnMobile">
+        <a href="https://www.blinkboxbooks.com/" style="color:#ffffff" class="hideOnMobile"><font color="#ffffff"
+                                                                                                  class="hideOnMobile">www.blinkboxbooks.com</font></a>
+      </td>
+      <td width="2%"></td>
     </tr>
   </table>
 
   <table class="hideOnMobile" cellpadding="0" cellspacing="0" border="0" bgcolor="#153D73" width="600" height="38"
-         align="center">
+         align="center"
+         style="border:solid 5px #153D73; border-bottom: solid 1px #000000; border-top: solid 1px #167FB9;">
     <tr>
-      <td width="99" align="center"><font color="#ffffff"><a href="http://www.blinkboxbooks.com/" style="color:#FFFFFF" target ="_blank" title="Featured">Featured</a></font></td>
+      <td width="99" align="center"><font color="#ffffff"><a href="http://www.blinkboxbooks.com/" style="color:#FFFFFF"
+                                                             target="_blank" title="Featured">Featured</a></font></td>
       <td width="1" height="20" bgcolor="#000000"></td>
-      <td width="99" align="center"><font color="#ffffff"><a href="http://www.blinkboxbooks.com/#!/categories/" style="color:#FFFFFF" target ="_blank" title="Categories">Categories</a></font></td>
+      <td width="99" align="center"><font color="#ffffff"><a href="http://www.blinkboxbooks.com/#!/categories/"
+                                                             style="color:#FFFFFF" target="_blank" title="Categories">Categories</a></font>
+      </td>
       <td width="1" height="20" bgcolor="#000000"></td>
-      <td width="99" align="center"><font color="#ffffff"><a href="http://www.blinkboxbooks.com/#!/bestsellers/" style="color:#FFFFFF" target ="_blank" title="Bestsellers">Bestsellers</a></font></td>
+      <td width="99" align="center"><font color="#ffffff"><a href="http://www.blinkboxbooks.com/#!/bestsellers/"
+                                                             style="color:#FFFFFF" target="_blank" title="Bestsellers">Bestsellers</a></font>
+      </td>
       <td width="1" height="20" bgcolor="#000000"></td>
-      <td width="99" align="center"><font color="#ffffff"><a href="http://www.blinkboxbooks.com/#!/new/" style="color:#FFFFFF" target ="_blank" title="New releases">New releases</a></font></td>
+      <td width="99" align="center"><font color="#ffffff"><a href="http://www.blinkboxbooks.com/#!/new-releases/"
+                                                             style="color:#FFFFFF" target="_blank" title="New releases">New releases</a></font></td>
       <td width="1" height="20" bgcolor="#000000"></td>
-      <td width="99" align="center"><font color="#ffffff"><a href="https://www.blinkboxbooks.com/#!/free_books/" style="color:#FFFFFF" target ="_blank" title="Free books">Free books</a></font></td>
+      <td width="99" align="center"><font color="#ffffff"><a href="https://www.blinkboxbooks.com/#!/free-books/"
+                                                             style="color:#FFFFFF" target="_blank" title="Free books">Free books</a></font></td>
       <td width="1" height="20" bgcolor="#000000"></td>
-      <td width="99" align="center"><font color="#ffffff"><a href="http://www.blinkboxbooks.com/#!/authors/" style="color:#FFFFFF" target ="_blank" title="Authors">Authors</a></font></td>
+      <td width="99" align="center"><font color="#ffffff"><a href="http://www.blinkboxbooks.com/#!/authors/"
+                                                             style="color:#FFFFFF" target="_blank" title="Authors">Authors</a></font>
+      </td>
     </tr>
   </table>
 
-  <table class="bbtable" cellpadding="10" cellspacing="0" border="0" bgcolor="#E0E0E0" width="600" align="center"
-         style="border:solid 1px #dfdfdf;">
+  <table class="bbtable" cellpadding="10" cellspacing="0" border="0" bgcolor="#F2F2F2" width="600" align="center"
+         style="border-bottom:solid 1px #FFFFFF;">
     <tr>
       <td width="100%">
         <p style="font-weight: bold;"><font color="#000000"><strong>Dear John,</strong></font></p></td>
@@ -181,27 +205,104 @@
       <td width="100%">
 
         <p style="margin-top:0">
-          <font color="#000000">Thanks for joining us - we promise to bring you a whole new experience in browsing, buying and reading great books.</font></p></td>
+          <font color="#000000">Welcome to blinkbox books! Discover a new reading experience on your iPhone, iPad, Android smartphone or tablet, including the new Hudl from Tesco.</font></p></td>
     </tr>
 
     <tr>
       <td width="100%">
 
+        <table class="bbtable" width="100%" align="center" cellpadding="2px">
+          <tr>
+            <td width="100%">
+
+
+        <table class="bbtable" width="100%" align="center" cellpadding="2px" style="border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt">
+          <tr width="100%">
+            <td class="force-col" width="138px" align="center">
+              <img src="https://media.blinkboxbooks.com/assets/emails/clubcard.png"
+                   alt="Earn Tesco Clubcard points"
+                   title="Earn Tesco Clubcard points" width="138" height="87"
+                   style="display:block" border="0"/>
+            </td>
+            <td class="force-col" align="center">
+              <p style="margin-top:0">
+                <font color="#000000" style="font-weight: bold">Earn Tesco Clubcard points</font><br/>
+                <font color="#000000">Add your Clubcard number to earn points on all eBooks costing £1 or more</font>
+              </p>
+            </td>
+          </tr>
+        </table>
+
+        <table class="bbtable" dir="rtl" width="100%" align="center" cellpadding="2px" style="border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; direction: rtl">
+          <tr width="100%">
+            <td class="force-col" width="153px" align="center">
+              <img src="https://media.blinkboxbooks.com/assets/emails/2013-12-04/books.png"
+                   alt="Earn Tesco Clubcard points"
+                   title="Earn Tesco Clubcard points" width="153" height="101"
+                   style="display:block; width: 100%; height: auto" border="0"/>
+            </td>
+            <td class="force-col">
+              <p style="margin-top:0" align="center">
+                <font color="#000000" style="font-weight: bold">A huge selection of books</font><br/>
+                <font color="#000000">Choose from hundreds of thousands of eBooks including brand new releases and bestselling authors</font>
+              </p>
+            </td>
+          </tr>
+        </table>
+
+        <table class="bbtable" width="100%" align="center" cellpadding="2px" style="border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt">
+          <tr width="100%">
+            <td class="force-col" width="141px" align="center">
+              <img src="https://media.blinkboxbooks.com/assets/emails/2013-12-04/read_sample.png"
+                   alt="Try before you buy"
+                   title="Try before you buy" width="141" height="118"
+                   style="display:block" border="0"/>
+            </td>
+            <td class="force-col" align="center">
+              <p style="margin-top:0">
+                <font color="#000000" style="font-weight: bold">Try before you buy</font><br/>
+                <font color="#000000">Read a free sample of any eBook, so you know you'll enjoy it</font>
+              </p>
+            </td>
+          </tr>
+        </table>
+            </td>
+          </tr>
+          </table>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td width="100%" style="padding: 10px">
+
         <p style="margin-top:0">
-          <font color="#000000">Your account is ready to go - all you need to do is start choosing from hundreds of thousands of books from fiction, thrillers, autobiography and dozens more categories. There’s something for everyone.</font></p></td>
+          <font color="#000000">We've included some information below to help you get started. If you have any other questions, <a
+                  href="https://contact.blinkboxbooks.com" style="color:#23B3F1" target="_blank"
+                  title="Support at blinkbox books">check out our online help topics</a>.</font></p></td>
     </tr>
 
     <tr>
-      <td width="100%">
+      <td width="100%" style="padding: 10px">
 
-        <p style="margin-top:0">
-          <font color="#000000" style="font-style:italic; font-weight:bold;">The blinkbox books team</font></p></td>
+        <p style="margin-top:0"><font color="#000000">Happy reading!</font></p></td>
+    </tr>
+
+    <tr>
+      <td width="100%" style="padding: 10px">
+
+        <p style="margin-top:0" >
+          <font color="#000000" style="font-style:italic; font-weight:bold;">The blinkbox books team</font></p>
+
+        <p style="margin-top:0; font-size:9px "><font color="#000000">This email address is unmanned, so please don't reply.</font></p>
+      </td>
     </tr>
 
   </table>
 
 
-  <table class="bbtable" cellpadding="10" cellspacing="0" border="0" bgcolor="#EEEBE4" width="600" align="center">
+  <table class="bbtable" cellpadding="10" cellspacing="0" border="0" bgcolor="#F2F2F2" width="600" align="center"
+         style="border-bottom:solid 1px #FFFFFF;">
     <tr>
       <td width="100%">
         <p style="font-weight: bold;"
@@ -214,73 +315,79 @@
 
     <tr>
       <td width="100%">
-        <table class="bbtable" width="100%" align="center" height="2">
-          <tr width="100%">
+        <table class="bbtable" width="100%">
+          <tr>
+            <td width="100%">
 
-            <td width="50%" align="center">
-              <a href="https://itunes.apple.com/gb/genre/ios/id36?mt=8"><img src="https://media.blinkboxbooks.com/params;v=0/assets/external/apple/download_on_the_app_store_2013-10-11.png"
-                              alt="Get blinkbox books on the App Store!"
-                              title="Get blinkbox books on the App Store!" width="135" height="40"
-                              style="display:block" border="0"/></a>
-            </td>
-            <td width="10%"></td>
-            <td width="40%" align="center">
-              <p><font color="#000000"> For iOS devices.</font></p>
+
+          <table class="bbtable" width="50%" align="center" cellpadding="8" bgcolor="#FFF69E" style="border: solid 2px #EFE8B5 ">
+            <tr width="100%">
+
+              <td width="50%" align="center" class="force-col">
+                <a href="https://itunes.apple.com/gb/genre/ios/id36?mt=8"><img src="https://media.blinkboxbooks.com/params;v=0/assets/external/apple/download_on_the_app_store_2013-10-11.png"
+                                alt="Get blinkbox books on the App Store!"
+                                title="Get blinkbox books on the App Store!" width="135" height="40"
+                                style="display:block" border="0"/></a>
+              </td>
+              <td width="50%" align="center" class="force-col">
+                <p><font color="#000000"> iPhones and iPads.</font></p>
+              </td>
+              <td></td>
+            </tr>
+
+            <tr width="100%">
+
+              <td width="50%" align="center" class="force-col">
+                <a href="http://play.google.com/"><img src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png"
+                                alt="Get blinkbox books on the Play Store!"
+                                title="Get blinkbox books on the App Store!" width="129" height="45"
+                                style="display:block" border="0"/></a>
+              </td>
+              <td width="50%" align="center" class="force-col">
+                <p><font color="#000000"> Android phone or tablet.</font></p>
+              </td>
+            </tr>
+          </table>
+
             </td>
           </tr>
-
-          <tr width="100%">
-
-            <td width="50%" align="center">
-              <a href="http://play.google.com/"><img src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png"
-                              alt="Get blinkbox books on the Play Store!"
-                              title="Get blinkbox books on the App Store!" width="129" height="45"
-                              style="display:block" border="0"/></a>
-            </td>
-            <td width="10%"></td>
-            <td width="40%" align="center">
-              <p><font color="#000000"> For Android devices.</font></p>
-            </td>
-          </tr>
-        </table>
+          </table>
       </td>
     </tr>
 
     <tr>
-      <td width="100%">
-        <p><font color="#000000">2. Once downloaded, sign into the app using your account email and password that you used to set up your account.<br/>3. Browse, buy and enjoy hundreds of thousands of books.</font></p>
+      <td width="100%" style="padding: 10px">
+        <p><font color="#000000">2. Once downloaded, sign into the app using your account email and password that you used to set up your account.</font></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="100%" style="padding: 10px">
+        <p><font color="#000000">3. Browse, buy and enjoy hundreds of thousands of books.</font></p>
       </td>
     </tr>
   </table>
 
-  <table class="bbtable" cellpadding="10" cellspacing="0" border="0" bgcolor="#e0e0e0" width="600" align="center">
+  <table class="bbtable" cellpadding="10" cellspacing="0" border="0" bgcolor="#F2F2F2" width="600" align="center" >
     <tr>
-      <td width="100%">
+      <td width="100%" align="center">
         <p style="font-weight: bold; color:#23B3F1">
-          <a href="http://www.blinkboxbooks.com/#!/account/paymentHistory" style="color:#23B3F1"
-             target="_blank" title="Payment history">Order &amp; payment history</a><br/>
-          <a href="http://www.blinkboxbooks.com/#!/account/personalDetails" style="color:#23B3F1"
-             target="_blank" title="Edit personal details">Your personal details</a><br/>
-          <a href="http://www.blinkboxbooks.com/#!/account/myPayments" style="color:#23B3F1" target="_blank"
-             title="Your payments">Your payments</a><br/>
-          <a href="http://www.blinkboxbooks.com/#!/account/myDevices" style="color:#23B3F1" target="_blank"
-             title="Your devices">Your devices</a>
+          <a href="http://www.blinkboxbooks.com" style="color:#23B3F1" target="_blank" title="Browse books">Browse books</a>
+          <font color="#23B3F1">&nbsp; | &nbsp;</font>
+          <a href="http://www.blinkboxbooks.com/#!/account" style="color:#23B3F1" target="_blank" title="Your account">Your account</a>
+          <font color="#23B3F1">&nbsp; | &nbsp;</font>
+          <a href="https://contact.blinkboxbooks.com" style="color:#23B3F1" target="_blank" title="Support">Support</a>
         </p>
       </td>
     </tr>
   </table>
 
 
-  <table class="bbtable" cellpadding="10" cellspacing="0" border="0" bgcolor="#EEEBE4" align="center" width="600">
+  <table class="bbtable" cellpadding="10" cellspacing="0" border="0" bgcolor="#F2F2F2" align="center" width="600"
+         style="border-top: solid 1px #FFFFFF">
     <tr>
-      <td width="100%">
-        <p style="font-weight: bold;"><font color="#000000" size="2"><strong>Need a hand with anything?</strong></font>
-        </p>
-        <a href="http://support.blinkboxbooks.com" style="color:#23B3F1" target="_blank"
-           title="Support at blinkbox books">
-          <p style="font-weight: bold;">We're here to help.</p><br/></a>
-
-        <p style="margin-top:0"><font color="#000000">Sorry, but you look like you are in danger of nodding off. <a href="http://www.blinkboxbooks.com/" style="color:#23B3F1" target="_blank" title="blinkbox books">Get back to discovering new books now.</a></font></p>
+      <td width="100%" style="padding: 10px">
+        <p style="margin-top:0; font-size: 9px"><font color="#666666">So. The important stuff. Well, occasionally we update our terms &amp; conditions. This is to make sure they're always in line with blinkbox policies and services offered. The latest version can be found at the bottom of each page of the blinkbox books website or by accessing the <a href="https://www.blinkboxbooks.com/#!/terms-conditions" style="color:#23B3F1" target="_blank" title="blinkbox books terms and conditions">blinkbox books terms &amp; conditions</a>. Do have a gander through it all, as we'll assume that your continued use of blinkbox indicates your acceptance. Thanks blinkboxers!</font></p>
       </td>
     </tr>
   </table>
@@ -288,7 +395,7 @@
   <table class="bbtable" cellpadding="10" cellspacing="0" border="0" bgcolor="#AFE4FF" width="600" height="38"
          align="center">
     <tr>
-      <td width="100%">
+      <td width="100%" style="padding: 10px">
         <p style="margin-top:0">
           <font color="#000000" size="1">&copy; blinkbox books Limited, 28-30 Kirby Street, London EC1N 8TE – Registered in England &amp; Wales No. 6265409.</font></p>
       </td>

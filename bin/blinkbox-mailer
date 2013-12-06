@@ -15,21 +15,43 @@ unless File.exist?(propfile)
   Process.exit(-1)
 end
 require 'java_properties'
-options = JavaProperties::Properties.new(propfile)
+@options = JavaProperties::Properties.new(propfile)
 
 require 'logger'
-options['logger'] = Logger.new(options[:logfile] || $stdout)
+@options['logger'] = Logger.new(@options[:logfile] || $stdout)
 
 require 'blinkbox/mailer'
 
-begin
-  w = Blinkbox::Mailer::Daemon.new(options)
-  w.start
-rescue SystemExit, Interrupt
-  options['logger'].info "Thanks for watching, shutting down."
+@initially_connected = false
 
-  w.stop
-rescue Exception => e
-  options['logger'].fatal "#{e.message} (see debug log for more details)"
-  options['logger'].debug "#{e.class}: #{e.message}\n#{e.backtrace.join("\n")}"
+def start_mailer
+  begin
+    @options['logger'].info "Error connecting to RabbitMQ, trying again in one minute."
+    w = Blinkbox::Mailer::Daemon.new(@options)
+    w.start
+  rescue SystemExit, Interrupt
+    @options['logger'].info "Thanks for watching, shutting down."
+    w.stop
+  rescue Net::ProtocolError => e
+    @options['logger'].fatal "Error with SMTP credentials. Please check them and the email service is running and start mailer again: #{e.message}"
+    @options['logger'].debug "#{e.class}: #{e.message}\n#{e.backtrace.join("\n")}"
+  rescue Bunny::ConnectionError, Bunny::PreconditionFailed, Bunny::TCPConnectionFailed, Bunny::ServerDownError, Bunny::ChannelError, Bunny::ConnectionClosedError => e
+    unless @initially_connected
+      @options['logger'].fatal "Could not establish an initial connection with RabbitMQ: #{e.message} (see debug log for more details)"
+      @options['logger'].debug "#{e.class}: #{e.message}\n#{e.backtrace.join("\n")}"
+      exit
+    end
+    @options['logger'].fatal "#{e.message} (see debug log for more details)"
+    @options['logger'].debug "#{e.class}: #{e.message}\n#{e.backtrace.join("\n")}"
+    @options['logger'].info "Error connecting to RabbitMQ, trying again in ten seconds."
+    sleep(10) # sleep then start mailer again.
+    start_mailer
+  rescue Exception => e
+    @options['logger'].fatal "#{e.message} (see debug log for more details)"
+    @options['logger'].debug "#{e.class}: #{e.message}\n#{e.backtrace.join("\n")}"
+    @options['logger'].info "Unknown exception. Exiting mailer. Please investigate this error and try mailer again."
+    exit
+  end
 end
+
+start_mailer
