@@ -45,7 +45,7 @@ def start_mailer
     @options['logger'].debug "#{e.class}: #{e.message}\n#{e.backtrace.join("\n")}"
     @options['logger'].info "Error connecting to RabbitMQ, trying again in ten seconds."
     sleep(10) # sleep then start mailer again.
-    start_mailer
+    retry
   rescue Exception => e
     @options['logger'].fatal "#{e.message} (see debug log for more details)"
     @options['logger'].debug "#{e.class}: #{e.message}\n#{e.backtrace.join("\n")}"
