@@ -56,7 +56,7 @@ module Blinkbox
             @amqp[:channel].nack(delivery_info.delivery_tag, false)
             @log.error "Failure to process message (##{delivery_info.delivery_tag}), rejected back to queue (#{e.message})"
             @log.debug "#{e.class}: #{e.message}\n\t#{e.backtrace.join("\n\t")}"
-          end          
+          end
         end
       end
 

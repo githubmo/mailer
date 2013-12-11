@@ -1,5 +1,10 @@
 #Mailer Change Log
 
+## 1.0.6 (2013-12-06 16:10)
+
+- [CP-808](https://tools.mobcastdev.com/jira/browse/CP-808) - Fix for not copign with a rabbitmq restart.
+- [CP-811](https://tools.mobcastdev.com/jira/browse/CP-811) - Updated HTML to the latest round of template update from UX
+
 ## 1.0.5 (2013-11-06 14:10)
 
 - Changed the footer of the email templates to reflect the new address.
