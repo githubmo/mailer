@@ -1,5 +1,11 @@
 #Mailer Change Log
 
+## 1.0.7 (2014-01-13 11:18)
+
+### Bug fix
+
+- [CP-963](https://tools.mobcastdev.com/jira/browse/CP-963) - Reporting support for user and client events.
+
 ## 1.0.6 (2013-12-06 16:10)
 
 - [CP-808](https://tools.mobcastdev.com/jira/browse/CP-808) - Fix for not copign with a rabbitmq restart.
