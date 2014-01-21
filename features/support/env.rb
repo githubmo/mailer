@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../../')
 require 'lib/blinkbox/mailer'
 require 'features/support/bunny-events-mock'
+require 'features/support/helpers.rb'
 require 'stringio'
 
 propfile = "features/support/mailer.properties.test"
