@@ -2,7 +2,7 @@
 
 ## 0.14.1 (2014-01-22 16:22)
 
-### Changed footer links
+### Bug Fix
 
 - [CWA-992](https://tools.mobcastdev.com/jira/browse/CWA-992) - CSS refresh
 
