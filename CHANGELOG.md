@@ -1,5 +1,11 @@
 #Mailer Change Log
 
+## 1.1.0 (2014-01-22 12:10)
+
+### CSS refresh
+
+- [CWA-992](https://tools.mobcastdev.com/jira/browse/CWA-992) - CSS refresh
+
 ## 1.0.7 (2014-01-13 11:18)
 
 ### Bug fix
