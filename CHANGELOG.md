@@ -1,6 +1,6 @@
 #Mailer Change Log
 
-## 1.1.1 (2014-01-22 16:22)
+## 0.14.1 (2014-01-22 16:22)
 
 ### Changed footer links
 
