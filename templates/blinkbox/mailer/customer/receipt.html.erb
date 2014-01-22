@@ -1,49 +1,57 @@
-<table class="bbtable" cellpadding="6" cellspacing="0" border="0" bgcolor="#F2F2F2" width="600" align="center" style="border:solid 5px #F2F2F2; border-bottom: solid 1px #FFFFFF">
-  <tr>
-    <td width="100%">
-      <p style="font-weight: bold;"><font color="#000000"><strong>Dear <%= @variables.salutation %>,</strong></font></p></td></tr>
+ <table class="bbtable" cellpadding="10" cellspacing="0" border="0" bgcolor="#FFFFFF" width="580" align="center">
+        <tr>
+            <td width="100%" bgcolor="#efefef" style="font-size: 14px; font-family:Arial, Helvetica, sans-serif; font--style: bold; ">
+                <font color="#000000">Dear <%= @variables.salutation %>,</font></td>
+        </tr>
+        
 
-  <tr><td width="100%">
+        <tr>
+            <td width="100%" style="padding-top: 30px;margin-top:0; font-family:Arial, Helvetica, sans-serif; font-size: 14px;mso-line-height-rule: exactly;line-height: 20px;">
 
-    <p style="margin-top:0"><font color="#000000">Thanks for choosing to use blinkbox books. Your book is now ready for you to download to your iPhone, iPad and Android tablet or smartphone, including the Hudl from Tesco.</font></p></td></tr>
+                <font color="#333333">Thanks for choosing blinkbox books. Your book is now ready for you to download to your iPhone, iPad, Android smartphone or tablet, including the new Hudl from Tesco.</font></td>
+        </tr>
 
-  <tr><td width="100%">
-    <table class="bbtable" width="100%" align="center" height="2" cellpadding="15" bgcolor="#ffffff">
-      <tr width="100%">
-        <td width="50%" align="left">
-          <p style="margin-top:0"><font color="#EF3A5A"><%= @variables.bookTitle %></font><br /><font color="#23B3F1"  style="text-decoration: underline;"><%= @variables.author %></font></p>
-        </td>
-        <td width="50%" align="right">
-          <p style="margin-top:0"><font color="#000000" style="font-weight: bold;">Total price: £<%= @variables.price %></font></p>
-        </td>
-      </tr>
+        <tr>
+            <td width="100%">
+
+                <table class="bbtable" width="100%" align="center" cellpadding="0">
+                    <tr>
+                        <td>
+
+
+                            <table class="bbtable" width="100%" cellpadding="20"  style="border-style: solid; border-color: #cccbca; border-width: 1px; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt">
+                                <tr>
+                                    <td width="50%" align="left" style="font-family:Arial, Helvetica, sans-serif;font-size: 14px;mso-line-height-rule: exactly;line-height: 20px; font-style:bold;"><font color="#000000"><%= @variables.bookTitle %></font><br />
+                                        <a href="" style="text-decoration: none; font-style: bold;"><font color="#ee0079"><%= @variables.author %></font></a></td>
+                                    <td width="50%" class="left" align="right" style="font-family:Arial, Helvetica, sans-serif;font-size: 14px;mso-line-height-rule: exactly;line-height: 20px; font-style: bold;"><font color="#333333">Total price: £<%= @variables.price %></font>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="100%" style="padding: 10px; font-family:Arial, Helvetica, sans-serif; font-size:14px; margin-top:0; mso-line-height-rule: exactly;line-height: 20px;">
+                <font color="#333333">If you have any questions, why not <a
+                        href="https://contact.blinkboxbooks.com" style="color:#ee0079; text-decoration: none;" target="_blank"
+                        title="Support at blinkbox books">check out our online help topics</a>.</font></td>
+        </tr>
+
+        <tr>
+            <td width="100%" style="padding: 10px; margin-top:0; font-family:Arial, Helvetica, sans-serif; font-size: 14px; font-style: italic; font-weight: bold;">
+                <font color="#333333">The blinkbox books team</font>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="100%" style="margin-top:0; font-family:Arial, Helvetica, sans-serif; font-size: 14px; padding-top: 0; padding-right: 10px; padding-bottom: 10px; padding-left: 10xp;">
+                <font color="#666666">This email address is unmanned, so please don't reply.</font>
+            </td>
+        </tr>
+
+
     </table>
-  </td></tr>
-  <tr><td width="100%">
-    <p style="margin-top:0"><font color="#000000">If you have any questions, why not <a
-    href="http://support.blinkboxbooks.com" style="color:#23B3F1" target="_blank"
-    title="Support at blinkbox books">check out our online help topics</a>.</font></p></td></tr>
-  <tr>
-    <td width="100%">
-
-      <p style="margin-top:0">
-        <font color="#000000" style="font-style:italic; font-weight:bold;">The blinkbox books team</font></p>
-
-      <p style="margin-top:0; font-size:9px "><font color="#000000">This email address is unmanned, so please don't reply.</font></p>
-    </td>
-  </tr>
-  </table>
-
-  <table class="bbtable" cellpadding="2" cellspacing="0" border="0" bgcolor="#F2F2F2" width="600" align="center" style="border:solid 5px #F2F2F2; ">
-    <tr>
-      <td width="100%" align="center">
-        <p style="font-weight: bold; color:#23B3F1">
-          <a href="http://www.blinkboxbooks.com" style="color:#23B3F1" target="_blank" title="Browse books">Browse books</a>
-          <font color="#23B3F1">&nbsp; | &nbsp;</font>
-          <a href="http://www.blinkboxbooks.com/#!/account" style="color:#23B3F1" target="_blank" title="Your account">Your account</a>
-          <font color="#23B3F1">&nbsp; | &nbsp;</font>
-          <a href="https://contact.blinkboxbooks.com" style="color:#23B3F1" target="_blank" title="Support">Support</a>
-        </p>
-      </td>
-    </tr>
-  </table>
