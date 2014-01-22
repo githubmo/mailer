@@ -1,5 +1,11 @@
 #Mailer Change Log
 
+## 1.1.1 (2014-01-22 16:22)
+
+### Changed footer links
+
+- [CWA-992](https://tools.mobcastdev.com/jira/browse/CWA-992) - CSS refresh
+
 ## 1.1.0 (2014-01-22 12:10)
 
 ### CSS refresh
