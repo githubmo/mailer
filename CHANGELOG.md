@@ -1,12 +1,12 @@
 #Mailer Change Log
 
-## 0.14.2 (2014-01-28 11:55)
+## 1.1.3 (2014-01-28 11:55)
 
 ### Bug Fix
 
 - [CWA-1102](https://tools.mobcastdev.com/jira/browse/CWA-1102) - CSS refresh - part 2 - blockers
 
-## 0.14.1 (2014-01-22 16:22)
+## 1.1.2 (2014-01-22 16:22)
 
 ### Bug Fix
 
