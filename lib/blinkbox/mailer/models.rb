@@ -34,7 +34,7 @@ module Blinkbox
           format.html
           format.text
         end
-        message_id = variables.select{ |k,v| k.to_s.include? "messageId"}[0]
+        message_id = variables.select{ |k,_| k.to_s.include? "messageId"}.first[1]
         headers['X-BBB-Message-Id'] = message_id if message_id
         headers['x-et-route'] = variables[:et_route_key] if variables[:et_route_key]
       end

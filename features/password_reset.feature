@@ -13,6 +13,7 @@ Feature: Sending a password reset email
       | resetLink | http://blinkbox.com/example_password_reset_url.html          |
     And the sender is set to "tester <test@test.com>"
     And the ExactTarget header is set
+    And the message id header is set
 
   Scenario: Sending a password reset email with link when given the correct template variable
     When the message is processed
@@ -21,6 +22,7 @@ Feature: Sending a password reset email
     And the html and text component matches the example output "password_reset"
     And it has the exact target headers
     And the sender is "test@test.com"
+    And it has the message id header
 
   Scenario Outline: Receipt email generation fails when missing a required variable
     But I do not provide the template variable "<missing_variable>"

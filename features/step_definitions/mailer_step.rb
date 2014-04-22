@@ -32,6 +32,11 @@ Given(/^the ExactTarget header is set$/) do
   @options[:et_route_key] = @et_header
 end
 
+Given(/^the message id header is set$/) do
+  @message_id = "message_id"
+  @options[:messageId] = @message_id
+end
+
 When(/^I do not provide the template variable "([^"]*)"$/) do |template_variable|
   # The template_variable will either be in the root of the hash or inside the templateVariables sub hash
   @options["templateVariables"].delete template_variable
@@ -91,4 +96,8 @@ end
 
 Then(/^it has the exact target headers$/) do
   expect(@email.header["x-et-route"].to_s).to eq(@et_header)
+end
+
+Then(/^it has the message id header$/) do
+  expect(@email.header["X-BBB-Message-Id"].to_s).to eq(@message_id)
 end
