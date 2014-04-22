@@ -27,6 +27,11 @@ Given(/^the sender is set to "([^"]*)"$/) do |sender|
   @options["email_sender"] = sender
 end
 
+Given(/^the ExactTarget header is set$/) do
+  @et_header = "something-very-long"
+  @options[:et_route_key] = @et_header
+end
+
 When(/^I do not provide the template variable "([^"]*)"$/) do |template_variable|
   # The template_variable will either be in the root of the hash or inside the templateVariables sub hash
   @options["templateVariables"].delete template_variable
@@ -40,7 +45,7 @@ end
 When(/^the message is processed$/) do
   ActionMailer::Base.delivery_method = :test
   fake_delivery_options = Bunny::DeliveryInfo.new
-  @options[:et_route_key] = "something-very-long" # for testing targetmail stuff
+  @options[:et_route_key] = @et_header  # for testing targetmail stuff
   @delivery_id = fake_delivery_options.identifier
   $mailer_daemon.process_mail(fake_delivery_options, @options)
 end
@@ -85,5 +90,5 @@ Then(/^the sender is "([^"]*)"$/) do |sender|
 end
 
 Then(/^it has the exact target headers$/) do
-  expect(@email.header["x-et-route"].to_s).to eq("something-very-long")
+  expect(@email.header["x-et-route"].to_s).to eq(@et_header)
 end

@@ -12,6 +12,7 @@ Feature: Sending a password reset email
       | salutation         | John                                                |
       | resetLink | http://blinkbox.com/example_password_reset_url.html          |
     And the sender is set to "tester <test@test.com>"
+    And the ExactTarget header is set
 
   Scenario: Sending a password reset email with link when given the correct template variable
     When the message is processed

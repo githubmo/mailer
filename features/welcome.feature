@@ -11,6 +11,7 @@ Feature: Sending a welcome email
     And it has the template variables:
       | salutation | John |
     And the sender is set to "tester <test@test.com>"
+    And the ExactTarget header is set
 
   Scenario: Generating an email from a template and provided variables
     When the message is processed

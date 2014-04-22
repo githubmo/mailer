@@ -11,6 +11,7 @@ Feature: Sending a password confirmed email
     And it has the template variables:
       | salutation         | John                         |
     And the sender is set to "tester <test@test.com>"
+    And the ExactTarget header is set
 
   Scenario: Sending a password confirmed email when given correct template variables
   # Please note that the names are not homogeneous as the template is called "password change(d)?" from UX
