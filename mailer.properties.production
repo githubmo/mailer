@@ -8,3 +8,4 @@ logfile = /var/log/blinkbox/mailer.log
 resource_server_write = /mnt/distribution/
 resource_server_http = http://internal-media.mobcastdev.com/
 email_queue = Emails.Outbound
+et_route_key = something-very-long
