@@ -1,5 +1,17 @@
 #Mailer Change Log
 
+## 1.1.6 (2014-03-14 16:00)
+
+- [CWA-1410] (https://tools.mobcastdev.com/jira/browse/CWA-1410) - Change link for iTunes
+
+## 1.1.5 (2014-03-14 16:00)
+
+- [CWA-1271] (https://tools.mobcastdev.com/jira/browse/CWA-1271) - Change link is password confirmed email
+
+## 1.1.4 (2014-03-06 15.52)
+
+- [CWA-1144] (https://tools.mobcastdev.com/jira/browse/CWA-1144) - Make sure iOS and Google play URLS are correct
+
 ## 1.1.3 (2014-01-28 11:55)
 
 ### Bug Fix
