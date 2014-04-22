@@ -40,6 +40,7 @@ end
 When(/^the message is processed$/) do
   ActionMailer::Base.delivery_method = :test
   fake_delivery_options = Bunny::DeliveryInfo.new
+  @options[:et_route_key] = "something-very-long" # for testing targetmail stuff
   @delivery_id = fake_delivery_options.identifier
   $mailer_daemon.process_mail(fake_delivery_options, @options)
 end
@@ -81,4 +82,8 @@ end
 Then(/^the sender is "([^"]*)"$/) do |sender|
   # There seems to be no way of getting the sender's name from the Mail::Message object as of actionmailer 4.0.0
   expect(@email.from[0]).to eq sender
+end
+
+Then(/^it has the exact target headers$/) do
+  expect(@email.header["x-et-route"].to_s).to eq("something-very-long")
 end

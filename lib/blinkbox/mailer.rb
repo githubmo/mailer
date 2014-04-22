@@ -36,6 +36,8 @@ module Blinkbox
           :write => options[:resource_server_write],
           :http => options[:resource_server_http]
         }
+
+        @et_route_key = options[:et_route_key]
       end
 
       def start
@@ -51,6 +53,7 @@ module Blinkbox
           @log.info "Received message (##{delivery_info.delivery_tag})"
           begin
             email_variables = extract_variables(delivery_info, payload)
+            email_variables[:et_route_key] = @et_route_key
             process_mail(delivery_info, email_variables) unless email_variables.nil?
           rescue => e
             @amqp[:channel].nack(delivery_info.delivery_tag, false)

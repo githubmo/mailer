@@ -1,6 +1,13 @@
 #Mailer Change Log
 
-## 1.1.6 (2014-03-14 16:00)
+## 1.2.0 (2014-04-21 11:34)
+
+### Feature
+
+- [CP-1380](https://tools.mobcastdev.com/jira/browse/CP-1380) - Allow for the specification of the 'x-et-route' header in the emails to be configurable to accomodate the use of ExactTarget.
+
+
+## 1.1.6 (2014-04-17 16:00)
 
 - [CWA-1410] (https://tools.mobcastdev.com/jira/browse/CWA-1410) - Change link for iTunes
 

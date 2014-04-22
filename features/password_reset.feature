@@ -18,6 +18,7 @@ Feature: Sending a password reset email
     Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
     And it has the subject "Resetting your blinkbox books password is easy"
     And the html and text component matches the example output "password_reset"
+    And it has the exact target headers
     And the sender is "test@test.com"
 
   Scenario Outline: Receipt email generation fails when missing a required variable

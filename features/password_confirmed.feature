@@ -17,6 +17,7 @@ Feature: Sending a password confirmed email
     When the message is processed
     Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
     And it has the subject "Your password has been changed"
+    And it has the exact target headers
     And the html and text component matches the example output "password_confirmed"
     And the sender is "test@test.com"
 
