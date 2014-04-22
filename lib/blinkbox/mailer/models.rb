@@ -34,11 +34,9 @@ module Blinkbox
           format.html
           format.text
         end
-        message_id = variables.select{ |k,v| k.to_s.include? ":messageId"}[0]
+        message_id = variables.select{ |k,v| k.to_s.include? "messageId"}[0]
         headers['X-BBB-Message-Id'] = message_id if message_id
         headers['x-et-route'] = variables[:et_route_key] if variables[:et_route_key]
-        # see http://help.mandrill.com/entries/21688056-Using-SMTP-Headers-to-customize-your-messages
-        #headers['X-MC-Track'] = 'open' if options[:disable_click_tracking]
       end
 
       def prepare_recipient(recipients)
