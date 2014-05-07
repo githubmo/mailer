@@ -26,8 +26,12 @@ module Blinkbox
 
       def generate_email(variables, default_subject, options = {})
         @variables = Locals.new(variables["templateVariables"])
+        cc = prepare_recipient(variables['cc']) rescue nil
+        bcc = prepare_recipient(variables['bcc']) rescue nil
         mail(
           to: prepare_recipient(variables['to']),
+          cc: cc,
+          bcc: bcc,
           subject: variables['subject'] || default_subject,
           from: variables["email_sender"] || default_params[:from]
         ) do |format|
@@ -36,6 +40,7 @@ module Blinkbox
         end
         message_id = variables.select{ |k,_| k.to_s.include? "messageId"}.first[1]
         headers['X-BBB-Message-Id'] = message_id if message_id
+        et_header = "#{variables["template"].to_s}_route_key".to_sym
         headers['x-et-route'] = variables[:et_route_key] if variables[:et_route_key]
       end
 

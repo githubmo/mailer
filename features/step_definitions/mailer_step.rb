@@ -29,7 +29,8 @@ end
 
 Given(/^the ExactTarget header is set$/) do
   @et_header = "something-very-long"
-  @options[:et_route_key] = @et_header
+  @header_key = "#{@template}_route_key".to_sym
+  @options[@header_key] = @et_header
 end
 
 Given(/^the message id header is set$/) do
@@ -50,7 +51,6 @@ end
 When(/^the message is processed$/) do
   ActionMailer::Base.delivery_method = :test
   fake_delivery_options = Bunny::DeliveryInfo.new
-  @options[:et_route_key] = @et_header  # for testing targetmail stuff
   @delivery_id = fake_delivery_options.identifier
   $mailer_daemon.process_mail(fake_delivery_options, @options)
 end
