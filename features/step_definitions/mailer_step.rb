@@ -29,8 +29,7 @@ end
 
 Given(/^the ExactTarget header is set$/) do
   @et_header = "something-very-long"
-  @header_key = "#{@template}_route_key".to_sym
-  @options[@header_key] = @et_header
+  @options[:et_route_key] = @et_header
 end
 
 Given(/^the message id header is set$/) do
