@@ -49,16 +49,20 @@ module Blinkbox
           }
         )
 
-        queue.subscribe(ack: true, block: true) do |delivery_info, metadata, payload|
+        queue.subscribe(ack: true, block: true) do |delivery_info, _, payload|
           @log.info "Received message (##{delivery_info.delivery_tag})"
-          begin
-            email_variables = extract_variables(delivery_info, payload)
-            process_mail(delivery_info, email_variables) unless email_variables.nil?
-          rescue => e
-            @amqp[:channel].nack(delivery_info.delivery_tag, false)
-            @log.error "Failure to process message (##{delivery_info.delivery_tag}), rejected back to queue (#{e.message})"
-            @log.debug "#{e.class}: #{e.message}\n\t#{e.backtrace.join("\n\t")}"
-          end
+          email_variables = extract_variables(delivery_info, payload)
+          process_message(delivery_info, email_variables)
+        end
+      end
+
+      def process_message(delivery_info, email_variables)
+        begin
+          process_mail(delivery_info, email_variables) unless email_variables.nil?
+        rescue => e
+          @amqp[:channel].nack(delivery_info.delivery_tag, false)
+          @log.error "Failure to process message (##{delivery_info.delivery_tag}), rejected back to queue (#{e.message})"
+          @log.debug "#{e.class}: #{e.message}\n\t#{e.backtrace.join("\n\t")}"
         end
       end
 

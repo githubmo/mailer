@@ -8,7 +8,11 @@ logfile = /var/log/blinkbox/mailer.log
 resource_server_write = /mnt/distribution/
 resource_server_http = http://internal-media.mobcastdev.com/
 email_queue = Emails.Outbound
-welcome_route_key = a_key_of_proportions
-receipt_route_key = something_something_the_dark_side
-password_reset_route_key = one_key_to_rule_them_all
-password_confirmed_route_key = the_keymaker_master_key
+
+# Please provide the exact target values in production for these variables
+# If not provided, Mailer will not raise an error and will assume we are not using
+# these headers
+welcome_route_key =
+receipt_route_key =
+password_reset_route_key =
+password_confirmed_route_key =

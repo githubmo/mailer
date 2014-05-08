@@ -51,7 +51,11 @@ When(/^the message is processed$/) do
   ActionMailer::Base.delivery_method = :test
   fake_delivery_options = Bunny::DeliveryInfo.new
   @delivery_id = fake_delivery_options.identifier
-  $mailer_daemon.process_mail(fake_delivery_options, @options)
+  begin
+    $mailer_daemon.process_message(fake_delivery_options, @options)
+  rescue Exception => e
+    @process_failure_exception = e
+  end
 end
 
 Then(/^an email is delivered to "(.*)"$/) do |email_address|
