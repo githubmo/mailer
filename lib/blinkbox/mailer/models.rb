@@ -40,7 +40,6 @@ module Blinkbox
         end
         message_id = variables.select{ |k,_| k.to_s.include? "messageId"}.first[1]
         headers['X-BBB-Message-Id'] = message_id if message_id
-        et_header = "#{variables["template"].to_s}_route_key".to_sym
         headers['x-et-route'] = variables[:et_route_key] if variables[:et_route_key]
       end
 

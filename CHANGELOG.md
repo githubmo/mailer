@@ -1,9 +1,5 @@
 #Mailer Change Log
 
-## 1.2.1 (2014-05-07 13:15)
-
--  (CP-1380)[https://tools.mobcastdev.com/jira/browse/CP-1380] and (CP-1427)[https://tools.mobcastdev.com/jira/browse/CP-1427]: Added support for multiple headers
-
 ## 1.2.0 (2014-04-21 11:34)
 
 ### Feature
