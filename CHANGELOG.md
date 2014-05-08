@@ -101,4 +101,3 @@
   - Creating a multipart email from the HTML and TXT that were created.
   - Sending the email if everything is valid.
   - Sending back to the DLQ if a variable is provided or the email was not sent out.
-  
