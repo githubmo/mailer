@@ -19,13 +19,9 @@ class Bunny::Channel
     Bunny::Queue.new
   end
 
-  def nack(delivery_tag, multiple = false, requeue = false)
-    $nacked ||= []
-    $nacked << delivery_tag
-  end
-
   def reject(delivery_tag, requeue = false)
-    nack(delivery_tag, false, requeue)
+    $rejected ||= []
+    $rejected << delivery_tag
   end
 
   def method_missing(m, *args, &block)

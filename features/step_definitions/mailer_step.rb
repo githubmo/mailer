@@ -43,7 +43,7 @@ When(/^I do not provide the template variable "([^"]*)"$/) do |template_variable
 end
 
 When(/^the message is rejected$/) do
-  delivery_id = $nacked.pop
+  delivery_id = $rejected.pop
   expect(delivery_id ).to eq @delivery_id
 end
 
@@ -88,7 +88,7 @@ Then(/^I do not deliver an email to "(.*)"$/) do |email|
 end
 
 Then(/^I get a message sent the "([^"]*)" queue$/) do |queue_suffix|
-  deliver_id = $nacked.pop
+  deliver_id = $rejected.pop
   expect(deliver_id).to eq @delivery_id
 end
 
