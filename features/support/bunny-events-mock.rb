@@ -24,6 +24,10 @@ class Bunny::Channel
     $nacked << delivery_tag
   end
 
+  def reject(delivery_tag, requeue = false)
+    nack(delivery_tag, false, requeue)
+  end
+
   def method_missing(m, *args, &block)
     puts "Method #{m} for the class Channel is stubbed for testing and is not running."
   end

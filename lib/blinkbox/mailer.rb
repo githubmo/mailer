@@ -60,21 +60,26 @@ module Blinkbox
         begin
           process_mail(delivery_info, email_variables) unless email_variables.nil?
         rescue => e
-          @amqp[:channel].nack(delivery_info.delivery_tag, false)
+          @amqp[:channel].reject(delivery_info.delivery_tag, false)
           @log.error "Failure to process message (##{delivery_info.delivery_tag}), rejected back to queue (#{e.message})"
           @log.debug "#{e.class}: #{e.message}\n\t#{e.backtrace.join("\n\t")}"
         end
       end
 
       def extract_variables(delivery_info, payload)
-        email_variables = Blinkbox::Mailer::XmlParser.get_vars_from_xml(payload) || {}
-        email_variables[:et_route_key] = @options["#{email_variables["template"]}_route_key".to_sym]
-        email_variables
-      rescue REXML::ParseException
-        @amqp[:channel].nack(delivery_info.delivery_tag, false)
-        @log.error "The incoming message (##{delivery_info.delivery_tag}) was incorrectly formed and was rejected back to the queue"
-        nil
-      end    
+        begin
+          email_variables = Blinkbox::Mailer::XmlParser.get_vars_from_xml(payload) || {}
+          email_variables[:et_route_key] = @options["#{email_variables["template"]}_route_key".to_sym]
+          email_variables
+        rescue REXML::ParseException
+          @amqp[:channel].reject(delivery_info.delivery_tag, false)
+          @log.error "The incoming message (##{delivery_info.delivery_tag}) was incorrectly formed and was rejected back to the queue"
+          nil
+        rescue => e
+          @log.error "The incoming message (##{delivery_info.delivery_tag}) was incorrectly processed due to an unknown error", e
+          @amqp[:channel].reject(delivery_info.delivery_tag, false)
+        end
+      end
 
       def process_mail(delivery_info, email_variables)
         begin
@@ -118,7 +123,7 @@ module Blinkbox
           @log.info "Email delivered (##{delivery_info.delivery_tag})"
 
         rescue ActionView::Template::Error => e
-          @amqp[:channel].nack(delivery_info.delivery_tag, false)
+          @amqp[:channel].reject(delivery_info.delivery_tag, false)
           @log.error "#{e.message} in the message (##{delivery_info.delivery_tag}) so it was rejected back to the queue"
         end
       end
