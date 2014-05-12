@@ -1,5 +1,18 @@
 #Mailer Change Log
 
+## 1.3.0 ([#31](https://git.mobcastdev.com/Platform/mailer/pull/31) 2014-05-07 12:13:57)
+
+Added support for multiple headers
+
+### New Feature
+
+Added support for multiple headers
+
+* [CP-1380](https://tools.mobcastdev.com/jira/browse/CP-1380)
+* [CP-1427](https://tools.mobcastdev.com/jira/browse/CP-1427)
+
+Added support for cc and bcc
+
 ## 1.2.0 (2014-04-21 11:34)
 
 ### Feature
