@@ -43,16 +43,19 @@ When(/^I do not provide the template variable "([^"]*)"$/) do |template_variable
 end
 
 When(/^the message is rejected$/) do
-  delivery_id = $nacked.pop
+  delivery_id = $rejected.pop
   expect(delivery_id ).to eq @delivery_id
 end
 
 When(/^the message is processed$/) do
   ActionMailer::Base.delivery_method = :test
   fake_delivery_options = Bunny::DeliveryInfo.new
-  @options[:et_route_key] = @et_header  # for testing targetmail stuff
   @delivery_id = fake_delivery_options.identifier
-  $mailer_daemon.process_mail(fake_delivery_options, @options)
+  begin
+    $mailer_daemon.process_message(fake_delivery_options, @options)
+  rescue Exception => e
+    @process_failure_exception = e
+  end
 end
 
 Then(/^an email is delivered to "(.*)"$/) do |email_address|
@@ -85,7 +88,7 @@ Then(/^I do not deliver an email to "(.*)"$/) do |email|
 end
 
 Then(/^I get a message sent the "([^"]*)" queue$/) do |queue_suffix|
-  deliver_id = $nacked.pop
+  deliver_id = $rejected.pop
   expect(deliver_id).to eq @delivery_id
 end
 
