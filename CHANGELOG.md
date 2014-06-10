@@ -1,5 +1,9 @@
 #Mailer Change Log
 
+## 1.1.6 (2014-03-14 16:00)
+
+- [CWA-1609] (https://tools.mobcastdev.com/jira/browse/CWA-1609) - Web - LEGAL - Update TCS & conf email
+
 ## 1.1.5 (2014-03-14 16:00)
 
 - [CWA-1271] (https://tools.mobcastdev.com/jira/browse/CWA-1271) - Change link is password confirmed email
