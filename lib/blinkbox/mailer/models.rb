@@ -26,19 +26,21 @@ module Blinkbox
 
       def generate_email(variables, default_subject, options = {})
         @variables = Locals.new(variables["templateVariables"])
+        cc = prepare_recipient(variables['cc']) rescue nil
+        bcc = prepare_recipient(variables['bcc']) rescue nil
         mail(
           to: prepare_recipient(variables['to']),
+          cc: cc,
+          bcc: bcc,
           subject: variables['subject'] || default_subject,
           from: variables["email_sender"] || default_params[:from]
         ) do |format|
           format.html
           format.text
         end
-        message_id = variables.select{ |k,v| k.include? ":messageId"}[0]
+        message_id = variables.select{ |k,_| k.to_s.include? "messageId"}.first[1]
         headers['X-BBB-Message-Id'] = message_id if message_id
-
-        # see http://help.mandrill.com/entries/21688056-Using-SMTP-Headers-to-customize-your-messages
-        headers['X-MC-Track'] = 'open' if options[:disable_click_tracking]
+        headers['x-et-route'] = variables[:et_route_key] if variables[:et_route_key]
       end
 
       def prepare_recipient(recipients)

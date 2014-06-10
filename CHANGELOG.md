@@ -1,8 +1,32 @@
 #Mailer Change Log
 
-## 1.1.6 (2014-03-14 16:00)
+## 1.3.1 (2014-06-10 14:00)
 
 - [CWA-1609] (https://tools.mobcastdev.com/jira/browse/CWA-1609) - Web - LEGAL - Update TCS & conf email
+
+## 1.3.0 ([#31](https://git.mobcastdev.com/Platform/mailer/pull/31) 2014-05-07 12:13:57)
+
+Added support for multiple headers
+
+### New Feature
+
+Added support for multiple headers
+
+* [CP-1380](https://tools.mobcastdev.com/jira/browse/CP-1380)
+* [CP-1427](https://tools.mobcastdev.com/jira/browse/CP-1427)
+
+Added support for cc and bcc
+
+## 1.2.0 (2014-04-21 11:34)
+
+### Feature
+
+- [CP-1380](https://tools.mobcastdev.com/jira/browse/CP-1380) - Allow for the specification of the 'x-et-route' header in the emails to be configurable to accomodate the use of ExactTarget.
+
+
+## 1.1.6 (2014-04-17 16:00)
+
+- [CWA-1410] (https://tools.mobcastdev.com/jira/browse/CWA-1410) - Change link for iTunes
 
 ## 1.1.5 (2014-03-14 16:00)
 

@@ -11,13 +11,17 @@ Feature: Sending a welcome email
     And it has the template variables:
       | salutation | John |
     And the sender is set to "tester <test@test.com>"
+    And the ExactTarget header is set
+    And the message id header is set
 
   Scenario: Generating an email from a template and provided variables
     When the message is processed
     Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
     And it has the subject "Welcome to blinkbox books"
     And the html and text component matches the example output "welcome"
+    And it has the exact target headers
     And the sender is "test@test.com"
+    And it has the message id header
 
   Scenario Outline: Receipt email generation fails when missing a required variable
     But I do not provide the template variable "<missing_variable>"
