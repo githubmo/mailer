@@ -1,5 +1,13 @@
 #Mailer Change Log
 
+## 1.4.0 ([#32](https://git.mobcastdev.com/Platform/mailer/pull/32) 2014-06-10 11:22:02)
+
+CWA-1609 Update terms and conditions
+
+#### New Feature
+
+- [CWA-1609] (https://tools.mobcastdev.com/jira/browse/CWA-1609) - Web - LEGAL - Update TCS & conf email
+
 ## 1.3.0 ([#31](https://git.mobcastdev.com/Platform/mailer/pull/31) 2014-05-07 12:13:57)
 
 Added support for multiple headers
