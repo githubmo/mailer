@@ -33,7 +33,7 @@ module Blinkbox
           cc: cc,
           bcc: bcc,
           subject: variables['subject'] || default_subject,
-          from: variables["email_sender"] || default_params[:from]
+          from: variables[:email_sender] || default_params[:from]
         ) do |format|
           format.html
           format.text
