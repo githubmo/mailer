@@ -24,7 +24,7 @@ Given(/^it has the template variables:$/) do |table|
 end
 
 Given(/^the sender is set to "([^"]*)"$/) do |sender|
-  @options["email_sender"] = sender
+  @options[:email_sender] = sender
 end
 
 Given(/^the ExactTarget header is set$/) do
