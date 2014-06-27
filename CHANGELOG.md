@@ -1,5 +1,13 @@
 #Mailer Change Log
 
+## 1.4.2 ([#34](https://git.mobcastdev.com/Platform/mailer/pull/34) 2014-06-27 10:44:34)
+
+Fixed a test
+
+### Bug fix
+
+- [CP-1545](http://jira.blinkbox.local/jira/browse/CP-1545) - Extracting the email sender from the properties files into the email variables so that they can be used.
+
 ## 1.4.1 ([#33](https://git.mobcastdev.com/Platform/mailer/pull/33) 2014-06-27 10:38:27)
 
 Extracting the sender from the properties file into the email_variables
