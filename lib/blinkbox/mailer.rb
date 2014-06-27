@@ -70,6 +70,7 @@ module Blinkbox
         begin
           email_variables = Blinkbox::Mailer::XmlParser.get_vars_from_xml(payload) || {}
           email_variables[:et_route_key] = @options["#{email_variables["template"]}_route_key".to_sym]
+          email_variables[:email_sender] = @options[:email_sender]
           email_variables
         rescue REXML::ParseException
           @amqp[:channel].reject(delivery_info.delivery_tag, false)
