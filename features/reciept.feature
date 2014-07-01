@@ -23,7 +23,7 @@ Feature: Sending a receipt after purchasing an item
     And it has the subject "Thanks for your purchase from blinkbox books!"
     And the html and text component matches the example output "receipt"
     And it has the exact target headers
-    And the sender is "test@test.com"
+    And the sender is "tester <test@test.com>"
     And it has the message id header
 
   Scenario Outline: Receipt email generation fails when missing a required variable
