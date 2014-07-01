@@ -21,7 +21,7 @@ Feature: Sending a password confirmed email
     And it has the subject "Your password has been changed"
     And it has the exact target headers
     And the html and text component matches the example output "password_confirmed"
-    And the sender is "test@test.com"
+    And the sender is "tester <test@test.com>"
     And it has the message id header
 
   Scenario Outline: Receipt email generation fails when missing a required variable
