@@ -1,5 +1,13 @@
 #Mailer Change Log
 
+## 1.4.3 ([#35](https://git.mobcastdev.com/Platform/mailer/pull/35) 2014-07-01 13:37:53)
+
+Tests now checking sender display name
+
+#### Patching Tests
+
+Previously the tests were checking the email was from "test@test.com", now it checks the email address and display name e.g. "tester <test@test.com>"
+
 ## 1.4.2 ([#34](https://git.mobcastdev.com/Platform/mailer/pull/34) 2014-06-27 10:44:34)
 
 Fixed a test
