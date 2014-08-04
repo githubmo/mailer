@@ -4,7 +4,7 @@ Feature: Sending a welcome email
   So that the customer can receive an appealing confirmation of joining blinkbox books
 
   Background:
-    Given a "welcome" email message is pending processing
+    Given a "hudl2 welcome" email message is pending processing
     And it has the recipients:
       | type | name     | email                           |
       | to   | John Doe | blinkbox_test+johndoe@gmail.com |
@@ -18,7 +18,7 @@ Feature: Sending a welcome email
     When the message is processed
     Then an email is delivered to "blinkbox_test+johndoe@gmail.com"
     And it has the subject "Welcome to blinkbox books"
-    And the html and text component matches the example output "welcome"
+    And the html and text component matches the example output "hudl2_welcome"
     And it has the exact target headers
     And the sender is "tester <test@test.com>"
     And it has the message id header

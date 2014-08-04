@@ -1,5 +1,6 @@
 GEM
-  remote: https://rubygems.org/
+  remote: http://artifactory.blinkbox.local/artifactory/api/gems/bbb-gems/
+  remote: http://artifactory.blinkbox.local/artifactory/api/gems/rubygems/
   specs:
     actionmailer (4.0.0)
       actionpack (= 4.0.0)

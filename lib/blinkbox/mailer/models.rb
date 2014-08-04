@@ -22,6 +22,10 @@ module Blinkbox
         generate_email variables, "Resetting your blinkbox books password is easy", disable_click_tracking: true
       end
 
+      def hudl2_welcome(variables = {})
+        generate_email variables, "Welcome to blinkbox books"
+      end
+
       private
 
       def generate_email(variables, default_subject, options = {})

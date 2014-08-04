@@ -17,7 +17,7 @@ Feature: Sending a password confirmed email
   Scenario: Sending a password confirmed email when given correct template variables
   # Please note that the names are not homogeneous as the template is called "password change(d)?" from UX
     When the message is processed
-    Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
+    Then an email is delivered to "blinkbox_test+johndoe@gmail.com"
     And it has the subject "Your password has been changed"
     And it has the exact target headers
     And the html and text component matches the example output "password_confirmed"

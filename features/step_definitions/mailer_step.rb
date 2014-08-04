@@ -61,6 +61,7 @@ end
 Then(/^an email is delivered to "(.*)"$/) do |email_address|
   number_of_emails_delivered = ActionMailer::Base.deliveries.size
   @email = ActionMailer::Base.deliveries.pop rescue nil # We always want to pop between tests
+  expect(@email.to[0]).to eq email_address
   expect(number_of_emails_delivered).to eq 1
 end
 
