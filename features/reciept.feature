@@ -19,7 +19,7 @@ Feature: Sending a receipt after purchasing an item
 
   Scenario: Generating an email from a template and provided variables
     When the message is processed
-    Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
+    Then an email is delivered to "blinkbox_test+johndoe@gmail.com"
     And it has the subject "Thanks for your purchase from blinkbox books!"
     And the html and text component matches the example output "receipt"
     And it has the exact target headers

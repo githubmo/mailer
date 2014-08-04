@@ -17,7 +17,7 @@ Feature: Sending a password reset email
 
   Scenario: Sending a password reset email with link when given the correct template variable
     When the message is processed
-    Then an email is delivered to "blinkbox_test+jondoe@gmail.com"
+    Then an email is delivered to "blinkbox_test+johndoe@gmail.com"
     And it has the subject "Resetting your blinkbox books password is easy"
     And the html and text component matches the example output "password_reset"
     And it has the exact target headers
