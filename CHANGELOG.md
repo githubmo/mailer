@@ -1,5 +1,13 @@
 #Mailer Change Log
 
+## 1.5.0 ([#36](https://git.mobcastdev.com/Platform/mailer/pull/36) 2014-08-04 10:01:01)
+
+Added skeleton for the hudl2 welcome emails
+
+#### New feature:
+
+Adding support for hudl2 welcome emails
+
 ## 1.4.4 ([#37](https://git.mobcastdev.com/Platform/mailer/pull/37) 2014-08-04 10:38:05)
 
 Use artifactory
