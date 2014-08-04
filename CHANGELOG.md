@@ -1,5 +1,11 @@
 #Mailer Change Log
 
+## 1.4.4 ([#37](https://git.mobcastdev.com/Platform/mailer/pull/37) 2014-08-04 10:38:05)
+
+Use artifactory
+
+Patch to use the platform cache on Artifactory
+
 ## 1.4.3 ([#35](https://git.mobcastdev.com/Platform/mailer/pull/35) 2014-07-01 13:37:53)
 
 Tests now checking sender display name
