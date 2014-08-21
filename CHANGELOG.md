@@ -1,5 +1,11 @@
 #Mailer Change Log
 
+## 1.5.1 ([#39](https://git.mobcastdev.com/Platform/mailer/pull/39) 2014-08-21 16:07:33)
+
+Rpm multi
+
+Patch to make this rpmable and multi
+
 ## 1.5.0 ([#36](https://git.mobcastdev.com/Platform/mailer/pull/36) 2014-08-04 10:01:01)
 
 Added skeleton for the hudl2 welcome emails
