@@ -9,16 +9,18 @@ if %w{--version -v}.include? ARGV.first
 end
 
 # Find a suitable properties file
-propfile = File.expand_path("../../mailer.properties",__FILE__)
-unless File.exist?(propfile)
+reference = File.join(__dir__,"../config/reference.properties")
+application = File.join(__dir__,"../config/application.properties")
+unless File.exist?(reference) && File.exist?(application)
   $stderr.puts "No properties file found."
   Process.exit(-1)
 end
 require 'java_properties'
-@options = JavaProperties::Properties.new(propfile)
+@options = JavaProperties::Properties.new(reference)
+@options.load(application)
 
 require 'logger'
-@options['logger'] = Logger.new(@options[:logfile] || $stdout)
+@options['logger'] = Logger.new(@options[:logfile].empty? ? STDOUT : @options[:logfile])
 
 require 'blinkbox/mailer'
 
