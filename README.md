@@ -103,5 +103,5 @@ To access the variables sent in the message in a template you need to use [ERB](
 1. Clone this repo
 2. Ensure you have all the necessary gems `bundle install --deployment`
 3. Copy the `mailer.properties.production` file to `mailer.properties` and edit to suit your set up
-4. Execute the app with `foreman start` or by running `bundle exec bin/blinkbox-mailer`
+4. Execute the app with `foreman start` or by running `bundle exec ruby bin/blinkbox-mailer`
 5. Push a message to the `Emails.Outbound` queue!
