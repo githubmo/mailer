@@ -1,5 +1,11 @@
 #Mailer Change Log
 
+## 1.5.2 ([#40](https://git.mobcastdev.com/Platform/mailer/pull/40) 2014-08-21 17:53:56)
+
+Adding rpmdefines
+
+Patch the add the missing rpmdefines
+
 ## 1.5.1 ([#39](https://git.mobcastdev.com/Platform/mailer/pull/39) 2014-08-21 16:07:33)
 
 Rpm multi
