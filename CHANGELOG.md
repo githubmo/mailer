@@ -1,5 +1,13 @@
 #Mailer Change Log
 
+## 1.5.3 ([#41](https://git.mobcastdev.com/Platform/mailer/pull/41) 2014-08-22 13:56:30)
+
+CWA-1778 Purchase email copy change
+
+Patch - purchase email copy change
+
+Note: this change should be merge after the release, next Tuesday morning.
+
 ## 1.5.2 ([#40](https://git.mobcastdev.com/Platform/mailer/pull/40) 2014-08-21 17:53:56)
 
 Adding rpmdefines
