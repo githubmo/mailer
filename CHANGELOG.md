@@ -1,5 +1,11 @@
 #Mailer Change Log
 
+## 1.5.4 ([#42](https://git.mobcastdev.com/Platform/mailer/pull/42) 2014-09-08 16:22:08)
+
+Updating hudl2 e-mail subject line with one from James Skelton
+
+Patch: Updating hudl2 e-mail subject line with one from James Skelton.  
+
 ## 1.5.3 ([#41](https://git.mobcastdev.com/Platform/mailer/pull/41) 2014-08-22 13:56:30)
 
 CWA-1778 Purchase email copy change
