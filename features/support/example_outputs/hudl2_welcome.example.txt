@@ -1,9 +1,17 @@
 Hi John,
 
-Welcome to blinkbox books.
+You're ready to read!
 
-Thanks,
+You now have £10 waiting to spend on ebooks at blinkbox Books
 
-blinkbox books
+To spend your £10:
+Open your Hudl blinkbox Books app
+
+1. Sign in to blinkbox Books on your Hudl
+2. Visit the shop
+3. Buy your favourite ebook and tap Pay Now
+
+The blinkbox books team
+
 
 This is a footer boilerplate that goes out on all text emails.
