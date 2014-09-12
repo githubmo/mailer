@@ -15,4 +15,3 @@ The blinkbox books team
 
 
 This is a footer boilerplate that goes out on all text emails.
-
