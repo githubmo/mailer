@@ -1,5 +1,13 @@
 #Mailer Change Log
 
+## 1.5.5 ([#43](https://git.mobcastdev.com/Platform/mailer/pull/43) 2014-09-12 10:23:16)
+
+Signed off Hudl 2 email
+
+patch
+
+Switched the template to be based on the password confirmation template instead of the welcome template to remove all the extraneous bits and added final copy from James
+
 ## 1.5.4 ([#42](https://git.mobcastdev.com/Platform/mailer/pull/42) 2014-09-08 16:22:08)
 
 Updating hudl2 e-mail subject line with one from James Skelton
