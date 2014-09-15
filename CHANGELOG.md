@@ -1,5 +1,11 @@
 #Mailer Change Log
 
+## 1.5.6 ([#44](https://git.mobcastdev.com/Platform/mailer/pull/44) 2014-09-15 15:31:49)
+
+Updated text for receipt email
+
+Patch to update the receipt email to mention Hudl first.
+
 ## 1.5.5 ([#43](https://git.mobcastdev.com/Platform/mailer/pull/43) 2014-09-12 10:23:16)
 
 Signed off Hudl 2 email
