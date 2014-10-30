@@ -23,7 +23,7 @@ module Blinkbox
       end
 
       def hudl2_welcome(variables = {})
-        generate_email variables, "You are ready to read with your £10 credit"
+        generate_email variables, "You're ready to read with your £10 credit"
       end
 
       private
