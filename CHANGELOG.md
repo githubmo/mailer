@@ -1,5 +1,11 @@
 #Mailer Change Log
 
+## 1.5.7 ([#45](https://git.mobcastdev.com/Platform/mailer/pull/45) 2014-10-30 14:54:19)
+
+Cwa-1934
+
+Patch - hudl2 welcome email copy change
+
 ## 1.5.6 ([#44](https://git.mobcastdev.com/Platform/mailer/pull/44) 2014-09-15 15:31:49)
 
 Updated text for receipt email
