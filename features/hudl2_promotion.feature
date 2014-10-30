@@ -17,7 +17,7 @@ Feature: Sending a hudl2 promotion email
   Scenario: Generating an email from a template and provided variables
     When the message is processed
     Then an email is delivered to "blinkbox_test+johndoe@gmail.com"
-    And it has the subject "You’re ready to read with your £10 credit"
+    And it has the subject "You're ready to read with your £10 credit"
     And the html and text component matches the example output "hudl2_welcome"
     And it has the exact target headers
     And the sender is "tester <test@test.com>"
