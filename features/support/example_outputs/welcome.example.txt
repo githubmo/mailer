@@ -1,9 +1,9 @@
 Hi John,
 
-Welcome to blinkbox books.
+Welcome to blinkbox Books.
 
 Thanks,
 
-blinkbox books
+blinkbox Books
 
 This is a footer boilerplate that goes out on all text emails.
