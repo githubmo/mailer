@@ -1,7 +1,7 @@
 Feature: Sending a welcome email
   As the email message transformation service
   I want to be able to send a welcome email to a customer
-  So that the customer can receive an appealing confirmation of joining blinkbox books
+  So that the customer can receive an appealing confirmation of joining blinkbox Books
 
   Background:
     Given a "welcome" email message is pending processing
@@ -17,7 +17,7 @@ Feature: Sending a welcome email
   Scenario: Generating an email from a template and provided variables
     When the message is processed
     Then an email is delivered to "blinkbox_test+johndoe@gmail.com"
-    And it has the subject "Welcome to blinkbox books"
+    And it has the subject "Welcome to blinkbox Books"
     And the html and text component matches the example output "welcome"
     And it has the exact target headers
     And the sender is "tester <test@test.com>"

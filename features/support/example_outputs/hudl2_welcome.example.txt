@@ -11,7 +11,7 @@ Open your hudl2 blinkbox Books app
 2. Visit the shop
 3. Buy your favourite ebook and tap Pay Now
 
-The blinkbox books team
+The blinkbox Books team
 
 
 This is a footer boilerplate that goes out on all text emails.

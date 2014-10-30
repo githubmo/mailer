@@ -3,14 +3,14 @@ module Blinkbox
     class Customer < ActionMailer::Base
       layout 'october_launch'
 
-      default from: "blinkbox books <noreply@blinkboxbooks.com>"
+      default from: "blinkbox Books <noreply@blinkboxbooks.com>"
 
       def welcome(variables = {})
-        generate_email variables, "Welcome to blinkbox books"
+        generate_email variables, "Welcome to blinkbox Books"
       end
 
       def receipt(variables = {})
-        generate_email variables, "Thanks for your purchase from blinkbox books!"
+        generate_email variables, "Thanks for your purchase from blinkbox Books!"
       end
 
       def password_confirmed(variables = {})
@@ -19,7 +19,7 @@ module Blinkbox
 
       def password_reset(variables = {})
         # this mail contains a password reset link which must not be click-tracked!
-        generate_email variables, "Resetting your blinkbox books password is easy", disable_click_tracking: true
+        generate_email variables, "Resetting your blinkbox Books password is easy", disable_click_tracking: true
       end
 
       def hudl2_welcome(variables = {})

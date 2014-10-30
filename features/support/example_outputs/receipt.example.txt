@@ -6,6 +6,6 @@ Author: Herman Melville
 Price: £0.17
 
 Thanks,
-blinkbox books
+blinkbox Books
 
 This is a footer boilerplate that goes out on all text emails.
