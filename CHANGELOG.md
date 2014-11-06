@@ -1,5 +1,11 @@
 #Mailer Change Log
 
+## 1.5.8 ([#46](https://git.mobcastdev.com/Platform/mailer/pull/46) 2014-11-06 14:02:28)
+
+Update logo image
+
+Patch - Rename logo image
+
 ## 1.5.7 ([#45](https://git.mobcastdev.com/Platform/mailer/pull/45) 2014-10-30 14:54:19)
 
 Cwa-1934
