@@ -1,7 +1,6 @@
-source "http://artifactory.blinkbox.local/artifactory/api/gems/bbb-gems/" 
-source "http://artifactory.blinkbox.local/artifactory/api/gems/rubygems/"
+source "https://rubygems.org/"
 
-gem 'actionmailer', '>= 4.0.0'
+gem 'actionmailer', '~> 4.0'
 gem 'java_properties'
 gem 'bunny'
 
