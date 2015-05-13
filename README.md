@@ -2,6 +2,10 @@
 
 This is a simple ruby application which sits and listens to a message queue for instructions to send particular email templates to the given address.
 
+## Dependency
+
+Mailer works off an AMQP queue, which has to be set up, configured then the queue configuration added to the properties files before initialising the software.
+
 ## Using this app
 
 ### Message format
